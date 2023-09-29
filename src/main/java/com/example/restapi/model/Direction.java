@@ -1,14 +1,14 @@
 package com.example.restapi.model;
 
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "service")
 public class Direction {
     @Id
     int id;
-
     String nom;
 
     public Direction(int id, String nom) {
@@ -35,5 +35,4 @@ public class Direction {
         this.nom = nom;
     }
 
-    
 }

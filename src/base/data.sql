@@ -23,3 +23,4 @@ INSERT INTO experience (experience, valeur) VALUES
     INSERT INTO nationalite (nationalite) VALUES
     ('Étranger'),
     ('National');
+

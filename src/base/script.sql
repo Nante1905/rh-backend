@@ -23,7 +23,7 @@ CREATE TABLE diplome (
 );
 CREATE TABLE sexe (
     idSexe SERIAL PRIMARY KEY,
-    valeur INTEGER
+    nom VARCHAR(20)
 );
 CREATE TABLE matrimoniale (
     idMatrimoniale SERIAL PRIMARY KEY,

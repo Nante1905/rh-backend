@@ -34,7 +34,7 @@ public class Utilisateur {
     @Transient
     Nationalite nationalite;
     @Transient
-    Genre genre;
+    Sexe genre;
 
     public Utilisateur() {
     }

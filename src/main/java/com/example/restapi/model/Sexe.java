@@ -1,10 +1,18 @@
 package com.example.restapi.model;
 
-public class Genre {
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
+public class Sexe {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
     String nom;
 
-    public Genre() {
+    public Sexe() {
     }
 
     public int getId() {

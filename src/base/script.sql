@@ -4,7 +4,7 @@ CREATE DATABASE ressource_humaine;
 
 CREATE TABLE service (
     idService SERIAL PRIMARY KEY,
-    nom_service VARCHAR(20)
+    nom_service VARCHAR(100)
 );
 CREATE TABLE job (
     idjob SERIAL PRIMARY KEY,

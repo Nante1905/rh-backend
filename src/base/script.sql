@@ -1,6 +1,22 @@
-CREATE DATABASE ressource_humaine;
+-- create database rh;
+-- \c rh;
 
-\c ressource_humaine;
+create table ville (
+    id serial primary key,
+    nom varchar(50)
+);
+
+create table utilisateur (
+    id serial primary key,
+    nom varchar(50) not null,
+    prenom varchar(50),
+    naissance date not null,
+    email varchar(50) not null,
+    telephone varchar(10),
+    mdp varchar(20) not null,
+    idville integer,
+    foreign key(idville) references ville (id)
+);
 
 CREATE TABLE service (
     idService SERIAL PRIMARY KEY,
@@ -72,4 +88,11 @@ CREATE TABLE job_nationalite (
     coeff INTEGER,
     FOREIGN KEY(idJob) REFERENCES job(idJob),
     FOREIGN KEY(idNationalite) REFERENCES nationalite(idNationalite)
+);
+
+create table cv (
+    id serial primary key,
+    idutilisateur integer not null,
+    creation date,
+    foreign key (idutilisateur) references utilisateur(id)
 );

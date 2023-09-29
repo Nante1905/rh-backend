@@ -8,15 +8,15 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "sexe")
-public class Genre {
+@Table(name = "matrimoniale")
+public class Matrimonial {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idsexe")
+    @Column(name = "idmatrimoniale")
     int id;
-    String nom;
+    String situation;
 
-    public Genre() {
+    public Matrimonial() {
     }
 
     public int getId() {
@@ -27,12 +27,12 @@ public class Genre {
         this.id = id;
     }
 
-    public String getNom() {
-        return nom;
+    public String getSituation() {
+        return situation;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setSituation(String situation) {
+        this.situation = situation;
     }
 
 }

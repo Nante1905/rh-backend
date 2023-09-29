@@ -5,18 +5,19 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
-@Table(name = "sexe")
-public class Genre {
+public class Diplome {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idsexe")
+    @Column(name = "id_diplome")
     int id;
     String nom;
+    int valeur;
 
-    public Genre() {
+    public Diplome() {
     }
 
     public int getId() {
@@ -33,6 +34,14 @@ public class Genre {
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public int getValeur() {
+        return valeur;
+    }
+
+    public void setValeur(int valeur) {
+        this.valeur = valeur;
     }
 
 }

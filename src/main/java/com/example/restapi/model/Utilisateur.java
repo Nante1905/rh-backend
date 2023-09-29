@@ -4,14 +4,12 @@ import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Transient;
 
 /**
  * Utilisateur
@@ -29,11 +27,13 @@ public class Utilisateur {
     String telephone;
     String mdp;
     @ManyToOne
-    @JoinColumn(name = "idville")
+    @JoinColumn(name = "id_ville")
     Ville ville;
-    @Transient
+    @ManyToOne
+    @JoinColumn(name = "id_nationalite")
     Nationalite nationalite;
-    @Transient
+    @ManyToOne
+    @JoinColumn(name = "id_sexe")
     Genre genre;
 
     public Utilisateur() {
@@ -101,6 +101,22 @@ public class Utilisateur {
 
     public void setVille(Ville ville) {
         this.ville = ville;
+    }
+
+    public Nationalite getNationalite() {
+        return nationalite;
+    }
+
+    public void setNationalite(Nationalite nationalite) {
+        this.nationalite = nationalite;
+    }
+
+    public Genre getGenre() {
+        return genre;
+    }
+
+    public void setGenre(Genre genre) {
+        this.genre = genre;
     }
 
 }

@@ -5,18 +5,17 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "sexe")
-public class Genre {
+public class Experience {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idsexe")
+    @Column(name = "idexperience")
     int id;
-    String nom;
+    String experience;
+    int valeur;
 
-    public Genre() {
+    public Experience() {
     }
 
     public int getId() {
@@ -27,12 +26,20 @@ public class Genre {
         this.id = id;
     }
 
-    public String getNom() {
-        return nom;
+    public String getExperience() {
+        return experience;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setExperience(String experience) {
+        this.experience = experience;
+    }
+
+    public int getValeur() {
+        return valeur;
+    }
+
+    public void setValeur(int valeur) {
+        this.valeur = valeur;
     }
 
 }

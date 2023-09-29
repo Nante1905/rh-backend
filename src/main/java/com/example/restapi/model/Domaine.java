@@ -1,22 +1,18 @@
 package com.example.restapi.model;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "sexe")
-public class Genre {
+public class Domaine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idsexe")
     int id;
     String nom;
 
-    public Genre() {
+    public Domaine() {
     }
 
     public int getId() {

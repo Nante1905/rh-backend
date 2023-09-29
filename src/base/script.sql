@@ -18,9 +18,7 @@ CREATE TABLE job (
 );
 CREATE TABLE diplome (
     idDiplome SERIAL PRIMARY KEY,
-    idJob SERIAL,
-    coeff INTEGER,
-    FOREIGN KEY(idJob) REFERENCES job(idJob)
+    nom INTEGER
 );
 CREATE TABLE sexe (
     idSexe SERIAL PRIMARY KEY,
@@ -41,34 +39,28 @@ CREATE TABLE nationalite (
 );
 CREATE TABLE job_diplome (
     idJob SERIAL,
-    idDiplome SERIAL,
+    idDiplome INTEGER,
     coeff INTEGER,
     FOREIGN KEY(idJob) REFERENCES job(idJob),
     FOREIGN KEY(idDiplome) REFERENCES diplome(idDiplome)
 );
-CREATE TABLE job_sexe (
-    idJob SERIAL,
-    idSexe SERIAL,
-    coeff INTEGER,
-    FOREIGN KEY(idJob) REFERENCES job(idJob),
-    FOREIGN KEY(idSexe) REFERENCES sexe(idSexe)
-);
+
 CREATE TABLE job_matrimoniale (
-    idJob SERIAL,
+    idJob INTEGER,
     idMatrimoniale SERIAL,
     coeff INTEGER,
     FOREIGN KEY(idJob) REFERENCES job(idJob),
     FOREIGN KEY(idMatrimoniale) REFERENCES matrimoniale(idMatrimoniale)
 );
 CREATE TABLE job_experience (
-    idJob SERIAL,
+    idJob INTEGER,
     idExperience SERIAL,
     coeff INTEGER,
     FOREIGN KEY(idJob) REFERENCES job(idJob),
     FOREIGN KEY(idExperience) REFERENCES experience(idExperience)
 );
 CREATE TABLE job_nationalite (
-    idJob SERIAL,
+    idJob INTEGER,
     idNationalite SERIAL,
     coeff INTEGER,
     FOREIGN KEY(idJob) REFERENCES job(idJob),

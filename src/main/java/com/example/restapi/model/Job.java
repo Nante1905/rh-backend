@@ -14,8 +14,11 @@ public class Job {
     double sal_min;
     double sal_max; 
     @ManyToOne
-    @JoinColumn(name = "service")
+    @JoinColumn(name = "idservice")
     Service service;
+    @oneToMany
+    @JoinColum(name = "idJob")
+    JobDiplome jobDiplome;
 
     public Job() {
     }

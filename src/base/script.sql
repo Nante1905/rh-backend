@@ -1,6 +1,6 @@
-CREATE DATABASE ressource_humaine;
+CREATE DATABASE rh;
 
-\c ressource_humaine;
+\c rh;
 
 CREATE TABLE service (
     idService SERIAL PRIMARY KEY,
@@ -18,12 +18,8 @@ CREATE TABLE job (
 );
 CREATE TABLE diplome (
     idDiplome SERIAL PRIMARY KEY,
-<<<<<<< HEAD
-    nom INTEGER
-=======
     nom varchar(100),
     valeur integer
->>>>>>> 02f0de80d96250c9f9d1ba2f07cf08c9b53b0cd1
 );
 CREATE TABLE sexe (
     idSexe SERIAL PRIMARY KEY,
@@ -43,13 +39,8 @@ CREATE TABLE nationalite (
     nationalite VARCHAR(20)
 );
 CREATE TABLE job_diplome (
-<<<<<<< HEAD
-    idJob SERIAL,
-    idDiplome INTEGER,
-=======
     idJob integer,
     idDiplome integer,
->>>>>>> 02f0de80d96250c9f9d1ba2f07cf08c9b53b0cd1
     coeff INTEGER,
     FOREIGN KEY(idJob) REFERENCES job(idJob),
     FOREIGN KEY(idDiplome) REFERENCES diplome(idDiplome)

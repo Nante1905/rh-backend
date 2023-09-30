@@ -1,7 +1,9 @@
 package com.example.restapi.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
+import com.example.restapi.customException.FileException;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Entity;
@@ -37,6 +39,19 @@ public class Utilisateur {
     Genre genre;
 
     public Utilisateur() {
+    }
+
+    // type: CV, certificat?
+    public String generateFileName(String originalName, String type) throws FileException {
+        String[] wordsInName = originalName.split("\\.");
+        if (wordsInName.length == 0) {
+            throw new FileException("Type de fichier méconnaissable");
+        }
+        String extension = wordsInName[wordsInName.length - 1];
+        if (extension.compareTo("pdf") != 0) {
+            throw new FileException(originalName + " doit être un pdf");
+        }
+        return this.getNom() + "_" + type + "_" + LocalDateTime.now().toString() + "." + extension;
     }
 
     public int getId() {

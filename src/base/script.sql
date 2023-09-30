@@ -53,6 +53,7 @@ create table domaine (
     nom varchar(200)
 );
 
+-- ---------------
 CREATE TABLE diplome (
     idDiplome SERIAL PRIMARY KEY,
     nom varchar(100),
@@ -155,3 +156,5 @@ create table cv_fichier (
     certificat varchar(255) not null,
     foreign key (id_cv) references cv(id)
 );
+
+--  FIN MIALY

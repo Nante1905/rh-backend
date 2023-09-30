@@ -13,6 +13,11 @@ public class CvFichier {
     public CvFichier() {
     }
 
+    public CvFichier(String cv, String certificat) {
+        setCv(cv);
+        setCertificat(certificat);
+    }
+
     public int getIdCv() {
         return idCv;
     }

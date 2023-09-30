@@ -1,44 +1,40 @@
 package com.example.restapi.model;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "job_diplome")
 public class JobDiplome {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GenericGenerator(name = "receiverGen", strategy = "foreign", parameters = {
+            @Parameter(name = "property", value = "jobDiplome") })
+    @GeneratedValue(generator = "receiverGen")
+    @Column(name = "idjobfk")
     int idJob;
+
     @OneToOne
-    @JoinColumn(name = "idDiplome")
-    @Transient
+    @JoinColumn(name = "iddiplome")
     Diplome diplome;
+
     int coeff;
     // int idDiplome;
 
-    public JobDiplome(int idJob, Diplome diplome, int coeff) {
-        this.idJob = idJob;
-        this.diplome = diplome;
-        this.coeff = coeff;
-    }
+    // public JobDiplome(Diplome diplome, int coeff) {
+    // this.diplome = diplome;
+    // this.coeff = coeff;
+    // }
 
     public JobDiplome() {
-    }
-
-    public int getIdJob() {
-        return idJob;
-    }
-
-    public void setIdJob(int idJob) {
-        this.idJob = idJob;
     }
 
     public Diplome getDiplome() {
@@ -55,5 +51,13 @@ public class JobDiplome {
 
     public void setCoeff(int coeff) {
         this.coeff = coeff;
+    }
+
+    public int getIdJob() {
+        return idJob;
+    }
+
+    public void setIdJob(int idJob) {
+        this.idJob = idJob;
     }
 }

@@ -1,30 +1,42 @@
 package com.example.restapi.model;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
 @Entity
 public class Job {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idjob")
     int idJob;
     String title;
     double volume;
     int man_day;
     double sal_min;
     double sal_max;
+
     @ManyToOne
     @JoinColumn(name = "idservice")
     Service service;
-    @OneToOne
-    @JoinColumn(name = "idJob")
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idjob", referencedColumnName = "idjobfk")
     JobDiplome jobDiplome;
+
+    public JobDiplome getJobDiplome() {
+        return jobDiplome;
+    }
+
+    public void setJobDiplome(JobDiplome jobDiplome) {
+        this.jobDiplome = jobDiplome;
+    }
 
     public Job() {
     }

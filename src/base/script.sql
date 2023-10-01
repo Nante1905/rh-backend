@@ -37,8 +37,8 @@ CREATE TABLE service (
     nom_service VARCHAR(100)
 );
 CREATE TABLE job (
-    idjob SERIAL PRIMARY KEY,
-    title VARCHAR(20),
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(256),
     volume INTEGER,
     man_day INTEGER,
     sal_min NUMERIC,
@@ -59,7 +59,10 @@ CREATE TABLE diplome (
     nom varchar(100),
     valeur integer
 );
-
+CREATE TABLE sexe (
+    idSexe SERIAL PRIMARY KEY,
+    nom VARCHAR(20)
+);
 CREATE TABLE matrimoniale (
     idMatrimoniale SERIAL PRIMARY KEY,
     situation VARCHAR(20)
@@ -70,38 +73,38 @@ CREATE TABLE experience (
     valeur INTEGER
 );
 CREATE TABLE job_diplome (
-    idJob integer,
+    id_job integer,
     idDiplome integer,
     coeff INTEGER,
-    FOREIGN KEY(idJob) REFERENCES job(idJob),
+    FOREIGN KEY(id_job) REFERENCES job(id),
     FOREIGN KEY(idDiplome) REFERENCES diplome(idDiplome)
 );
 CREATE TABLE job_sexe (
-    idJob integer,
+   id_job integer,
     idSexe integer,
     coeff INTEGER,
-    FOREIGN KEY(idJob) REFERENCES job(idJob),
+    FOREIGN KEY(id_job) REFERENCES job(id),
     FOREIGN KEY(idSexe) REFERENCES sexe(idSexe)
 );
 CREATE TABLE job_matrimoniale (
-    idJob integer,
+    id_job integer,
     idMatrimoniale integer,
     coeff INTEGER,
-    FOREIGN KEY(idJob) REFERENCES job(idJob),
+    FOREIGN KEY(id_job) REFERENCES job(id),
     FOREIGN KEY(idMatrimoniale) REFERENCES matrimoniale(idMatrimoniale)
 );
 CREATE TABLE job_experience (
-    idJob integer,
+    id_job integer,
     idExperience integer,
     coeff INTEGER,
-    FOREIGN KEY(idJob) REFERENCES job(idJob),
+    FOREIGN KEY(id_job) REFERENCES job(id),
     FOREIGN KEY(idExperience) REFERENCES experience(idExperience)
 );
 CREATE TABLE job_nationalite (
-    idJob integer,
+    id_job integer,
     idNationalite integer,
     coeff INTEGER,
-    FOREIGN KEY(idJob) REFERENCES job(idJob),
+    FOREIGN KEY(id_job) REFERENCES job(id),
     FOREIGN KEY(idNationalite) REFERENCES nationalite(idNationalite)
 );
 

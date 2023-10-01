@@ -5,19 +5,24 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Diplome {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_diplome")
+    @Column(name = "iddiplome")
     int id;
+
     String nom;
     int valeur;
 
     public Diplome() {
+    }
+
+    public Diplome(int idDiplome, String nom, int valeur) {
+        this.id = idDiplome;
+        this.nom = nom;
+        this.valeur = valeur;
     }
 
     public int getId() {
@@ -43,5 +48,4 @@ public class Diplome {
     public void setValeur(int valeur) {
         this.valeur = valeur;
     }
-
 }

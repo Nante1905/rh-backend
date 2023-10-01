@@ -1,5 +1,6 @@
 package com.example.restapi.services.job;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,16 +42,20 @@ public class JobService {
     @Autowired
     ReponseRepository reponseRepository;
 
+    public List<JobDetail> findAll() {
+        return this.jobDetailRepository.findAll();
+    }
+
     @Transactional(rollbackOn = { Exception.class })
-    public JobDetail save(JobDetail jobDetail) throws Exception {
+    public Optional<JobDetail> save(JobDetail jobDetail) throws Exception {
         Job job = new Job(jobDetail.getTitle(), jobDetail.getVolume(), jobDetail.getMan_day(),
                 jobDetail.getSal_min(),
                 jobDetail.getSal_max(), jobDetail.getService());
-        System.out.println("JOBSERVICEFRONT => " + jobDetail.getService().getIdService());
+        // System.out.println("JOBSERVICEFRONT => " + jobDetail.getService().getId());
 
         job = this.jobRepository.save(job);
 
-        job.getService().setIdService(1);
+        // job.getService().setIdService(1);
 
         JobDiplome jobDiplome = jobDetail.getJobDiplome();
         jobDiplome.setIdJob(job.getIdJob());
@@ -73,27 +78,22 @@ public class JobService {
         this.manager.persist(jobSexe);
 
         Questionnaire qcm = jobDetail.getQuestionnaire();
-        System.out.println("from front >>>> " + qcm.toString());
+        // System.out.println("from front >>>> " + qcm.toString());
         qcm.setIdJob(job.getIdJob());
         qcm = questionnaireRepository.save(qcm);
-        Question insertedQ = null;
-        System.out.println(" >>>>> after insert >>>>> " + qcm.toString());
+        // System.out.println(" >>>>> after insert >>>>> " + qcm.toString());
         System.out.println(qcm.getQuestions().size());
         for (Question q : qcm.getQuestions()) {
-            q.setId(0);
             q.setIdQuestionnaire(qcm.getId());
             q = questionRepository.save(q);
-            System.out.println(" after insert >>>>> " + q.toString());
-            // for (Reponse r : q.getReponses()) {
-            // r.setId(0);
-            // r.setIdQuestion(q.getId());
-            // }
-            // reponseRepository.saveAll(q.getReponses());
+            // System.out.println(" after insert >>>>> " + q.toString());
+            for (Reponse r : q.getReponses()) {
+                // System.out.println("R ID " + r.getId());
+                r.setIdQuestion(q.getId());
+            }
+            reponseRepository.saveAll(q.getReponses());
         }
-
-        System.out.println(" >>>>> VITA");
-        return new JobDetail();
-        // return this.jobDetailRepository.findById(job.getIdJob());
+        return this.jobDetailRepository.findById(job.getIdJob());
     }
 
 }

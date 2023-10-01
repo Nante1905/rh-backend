@@ -41,7 +41,7 @@ public class TestController {
     public ResponseEntity<HashMap<String, Object>> saveJob(@RequestBody JobDetail job) throws Exception {
         HashMap<String, Object> result = new HashMap<>();
 
-        System.out.println(job.getService().getIdService());
+        System.out.println(job.getService().getId());
 
         // try {
         result.put("OK", true);

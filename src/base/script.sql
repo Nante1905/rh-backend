@@ -33,7 +33,7 @@ create table utilisateur (
 );
 
 CREATE TABLE service (
-    idService SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     nom_service VARCHAR(100)
 );
 CREATE TABLE job (
@@ -44,7 +44,7 @@ CREATE TABLE job (
     sal_min NUMERIC,
     sal_max NUMERIC,
     idService integer,
-    FOREIGN KEY(idService) REFERENCES service(idService)
+    FOREIGN KEY(idService) REFERENCES service(id)
 );
 -- MIALY V3: 
 

@@ -18,7 +18,7 @@ public class Question {
     String contenu;
     int coeff;
     @OneToMany
-    @JoinColumn(name = "id", insertable = false)
+    @JoinColumn(name = "id", insertable = false, updatable = false)
     List<Reponse> reponses;
 
     public String toString() {

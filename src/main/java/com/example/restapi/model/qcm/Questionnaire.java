@@ -16,11 +16,11 @@ public class Questionnaire {
     int id;
     int idJob;
     @OneToMany
-    @JoinColumn(name = "id", insertable = false)
+    @JoinColumn(name = "id", insertable = false, updatable = false)
     List<Question> questions;
 
     public String toString() {
-        return this.getId() + " " + this.getIdJob();
+        return this.getId() + " job " + this.getIdJob();
     }
 
     public int getId() {

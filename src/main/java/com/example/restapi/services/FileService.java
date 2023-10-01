@@ -21,6 +21,7 @@ public class FileService {
     private Path root = Paths.get("src/main/resources/static/files");
 
     public void save(MultipartFile file, String name) throws FileAlreadyExistsException, FileException {
+        System.out.println(root.resolve("1.pdf"));
         try {
             if (name == null) {
                 Files.copy(file.getInputStream(),
@@ -32,6 +33,8 @@ public class FileService {
             if (e instanceof FileAlreadyExistsException) {
                 throw new FileAlreadyExistsException("A file with this name already exists");
             }
+            System.out.println(">>>>>>>>>>>>>> " + e.getMessage());
+            e.printStackTrace();
             throw new FileException(e.getMessage());
         }
     }

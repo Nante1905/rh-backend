@@ -1,6 +1,7 @@
 package com.example.restapi.services;
 
 import java.nio.file.FileAlreadyExistsException;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,5 +68,9 @@ public class CVService {
 
     public Optional<DetailsCv> findById(int id) {
         return this.detailsRepository.findById(id);
+    }
+
+    public List<DetailsCv> findAll() {
+        return this.detailsRepository.findAll();
     }
 }

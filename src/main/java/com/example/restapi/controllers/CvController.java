@@ -1,14 +1,17 @@
 package com.example.restapi.controllers;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -81,10 +84,19 @@ public class CvController {
     // return ResponseEntity.ok().body("ok");
     // }
 
-    @PostMapping(value = "/create", consumes = "multipart/form-data")
-    public DetailsCv createCV(
-            @RequestParam(name = "cvinfo") DetailsCv cv) {
-        return cv;
+    @PostMapping(value = "/create", consumes = "application/json")
+    public ResponseEntity<HashMap<String, Object>> createCV(@RequestBody DetailsCv cv) {
+        HashMap<String, Object> results = new HashMap<>();
+
+        try {
+            this.cvService.save(cv);
+            results.put("OK", true);
+            return new ResponseEntity<HashMap<String, Object>>(results, HttpStatus.OK);
+        } catch (Exception e) {
+            results.put("OK", false);
+            results.put("message", e.getMessage());
+            return new ResponseEntity<HashMap<String, Object>>(results, HttpStatus.OK);
+        }
     }
 
     @PostMapping(value = "test")

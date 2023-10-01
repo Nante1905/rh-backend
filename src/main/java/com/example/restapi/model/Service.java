@@ -10,16 +10,15 @@ import jakarta.persistence.Id;
 public class Service {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     int id;
     String nom_service;
+
+    public Service() {
+    }
 
     public Service(int idSevice, String nom_service) {
         setId(idSevice);
         setNom_service(nom_service);
-    }
-
-    public Service() {
     }
 
     public String getNom_service() {

@@ -1,7 +1,5 @@
 package com.example.restapi.services.job;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +12,6 @@ import com.example.restapi.model.job.JobNationalite;
 import com.example.restapi.model.job.JobSexe;
 import com.example.restapi.model.qcm.Question;
 import com.example.restapi.model.qcm.Questionnaire;
-import com.example.restapi.model.qcm.Reponse;
 import com.example.restapi.repositories.job.JobDetailRepository;
 import com.example.restapi.repositories.job.JobRepository;
 import com.example.restapi.repositories.qcm.QuestionRepository;
@@ -46,11 +43,11 @@ public class JobService {
         Job job = new Job(jobDetail.getTitle(), jobDetail.getVolume(), jobDetail.getMan_day(),
                 jobDetail.getSal_min(),
                 jobDetail.getSal_max(), jobDetail.getService());
-        System.out.println("JOBSERVICEFRONT => " + jobDetail.getService().getIdService());
+        System.out.println("JOBSERVICEFRONT => " + jobDetail.getService().getId());
 
         job = this.jobRepository.save(job);
 
-        job.getService().setIdService(1);
+        job.getService().setId(1);
 
         JobDiplome jobDiplome = jobDetail.getJobDiplome();
         jobDiplome.setIdJob(job.getIdJob());

@@ -11,23 +11,23 @@ public class Service {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idservice")
-    int idService;
+    int id;
     String nom_service;
 
     public Service(int idSevice, String nom_service) {
-        this.idService = idSevice;
+        this.id = idSevice;
         this.nom_service = nom_service;
     }
 
     public Service() {
     }
 
-    public int getIdService() {
-        return idService;
+    public int getId() {
+        return id;
     }
 
-    public void setIdService(int idSevice) {
-        this.idService = idSevice;
+    public void setId(int idService) {
+        this.id = idService;
     }
 
     public String getNom_service() {

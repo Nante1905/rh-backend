@@ -18,8 +18,6 @@ import com.example.restapi.repositories.job.JobDetailRepository;
 import com.example.restapi.repositories.job.JobRepository;
 import com.example.restapi.services.job.JobService;
 
-import jakarta.persistence.EntityManager;
-
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/test")
@@ -41,7 +39,7 @@ public class TestController {
     public ResponseEntity<HashMap<String, Object>> saveJob(@RequestBody JobDetail job) throws Exception {
         HashMap<String, Object> result = new HashMap<>();
 
-        System.out.println(job.getService().getIdService());
+        System.out.println(job.getService().getId());
 
         // try {
         result.put("OK", true);

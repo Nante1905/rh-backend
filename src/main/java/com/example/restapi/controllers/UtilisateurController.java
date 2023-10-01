@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.restapi.config.Props;
 import com.example.restapi.model.Utilisateur;
 import com.example.restapi.model.cv.DetailsCv;
 import com.example.restapi.services.CVService;
@@ -26,17 +27,13 @@ public class UtilisateurController {
 
     @GetMapping()
     public List<Utilisateur> findAll() {
+        System.out.println(Props.getResourceFolder());
         return this.uService.findAll();
     }
 
     @PostMapping(value = "sign")
     public Utilisateur signIn(@RequestBody Utilisateur u) {
         return this.uService.save(u);
-    }
-
-    @PostMapping(value = "cv/create")
-    public void createCV(@RequestBody DetailsCv cv) {
-        this.cvService.save(cv);
     }
 
 }

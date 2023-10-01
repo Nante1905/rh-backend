@@ -53,6 +53,7 @@ create table domaine (
     nom varchar(200)
 );
 
+-- ---------------
 CREATE TABLE diplome (
     idDiplome SERIAL PRIMARY KEY,
     nom varchar(100),

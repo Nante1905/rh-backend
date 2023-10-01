@@ -38,8 +38,26 @@ public class DetailsCv {
     @OneToOne
     @JoinColumn(name = "id")
     CvExperience experience;
+    @OneToOne
+    @JoinColumn(name = "id")
+    CvFichier fichier;
 
     public DetailsCv() {
+    }
+
+    @Override
+    public String toString() {
+        return this.getId() + " nom " + this.getNom() + " u: " + this.getUtilisateur() + " fichier: "
+                + this.getFichier() + " dipl : "
+                + this.getDiplome();
+    }
+
+    public CvFichier getFichier() {
+        return fichier;
+    }
+
+    public void setFichier(CvFichier fichier) {
+        this.fichier = fichier;
     }
 
     public Utilisateur getUtilisateur() {

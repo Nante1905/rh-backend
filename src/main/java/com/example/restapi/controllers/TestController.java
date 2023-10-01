@@ -18,6 +18,8 @@ import com.example.restapi.repositories.job.JobDetailRepository;
 import com.example.restapi.repositories.job.JobRepository;
 import com.example.restapi.services.job.JobService;
 
+import jakarta.persistence.EntityManager;
+
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/test")
@@ -43,7 +45,7 @@ public class TestController {
 
         // try {
         result.put("OK", true);
-        result.put("data", this.jobService.save(job).get());
+        result.put("data", this.jobService.save(job));
         return new ResponseEntity<HashMap<String, Object>>(result, HttpStatus.OK);
         // } catch (Exception e) {
         // result.put("OK", false);
@@ -51,4 +53,5 @@ public class TestController {
         // return new ResponseEntity<HashMap<String, Object>>(result, HttpStatus.OK);
         // }
     }
+
 }

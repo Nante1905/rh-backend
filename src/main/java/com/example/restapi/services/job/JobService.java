@@ -12,8 +12,14 @@ import com.example.restapi.model.job.JobExperience;
 import com.example.restapi.model.job.JobMatrimoniale;
 import com.example.restapi.model.job.JobNationalite;
 import com.example.restapi.model.job.JobSexe;
+import com.example.restapi.model.qcm.Question;
+import com.example.restapi.model.qcm.Questionnaire;
+import com.example.restapi.model.qcm.Reponse;
 import com.example.restapi.repositories.job.JobDetailRepository;
 import com.example.restapi.repositories.job.JobRepository;
+import com.example.restapi.repositories.qcm.QuestionRepository;
+import com.example.restapi.repositories.qcm.QuestionnaireRepository;
+import com.example.restapi.repositories.qcm.ReponseRepository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
@@ -28,15 +34,23 @@ public class JobService {
 
     @Autowired
     JobDetailRepository jobDetailRepository;
+    @Autowired
+    QuestionnaireRepository questionnaireRepository;
+    @Autowired
+    QuestionRepository questionRepository;
+    @Autowired
+    ReponseRepository reponseRepository;
 
     @Transactional(rollbackOn = { Exception.class })
-    public Optional<JobDetail> save(JobDetail jobDetail) throws Exception {
+    public JobDetail save(JobDetail jobDetail) throws Exception {
         Job job = new Job(jobDetail.getTitle(), jobDetail.getVolume(), jobDetail.getMan_day(),
                 jobDetail.getSal_min(),
                 jobDetail.getSal_max(), jobDetail.getService());
         System.out.println("JOBSERVICEFRONT => " + jobDetail.getService().getIdService());
 
         job = this.jobRepository.save(job);
+
+        job.getService().setIdService(1);
 
         JobDiplome jobDiplome = jobDetail.getJobDiplome();
         jobDiplome.setIdJob(job.getIdJob());
@@ -58,6 +72,28 @@ public class JobService {
         jobSexe.setIdJob(job.getIdJob());
         this.manager.persist(jobSexe);
 
-        return this.jobDetailRepository.findById(job.getIdJob());
+        Questionnaire qcm = jobDetail.getQuestionnaire();
+        System.out.println("from front >>>> " + qcm.toString());
+        qcm.setIdJob(job.getIdJob());
+        qcm = questionnaireRepository.save(qcm);
+        Question insertedQ = null;
+        System.out.println(" >>>>> after insert >>>>> " + qcm.toString());
+        System.out.println(qcm.getQuestions().size());
+        for (Question q : qcm.getQuestions()) {
+            q.setId(0);
+            q.setIdQuestionnaire(qcm.getId());
+            q = questionRepository.save(q);
+            System.out.println(" after insert >>>>> " + q.toString());
+            // for (Reponse r : q.getReponses()) {
+            // r.setId(0);
+            // r.setIdQuestion(q.getId());
+            // }
+            // reponseRepository.saveAll(q.getReponses());
+        }
+
+        System.out.println(" >>>>> VITA");
+        return new JobDetail();
+        // return this.jobDetailRepository.findById(job.getIdJob());
     }
+
 }

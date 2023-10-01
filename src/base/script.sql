@@ -87,7 +87,7 @@ CREATE TABLE job_sexe (
 );
 CREATE TABLE job_matrimoniale (
     id_job integer,
-    idMatrimoniale integer,
+    idMatrimoniale integer,\
     coeff INTEGER,
     FOREIGN KEY(id_job) REFERENCES job(id),
     FOREIGN KEY(idMatrimoniale) REFERENCES matrimoniale(idMatrimoniale)
@@ -157,4 +157,27 @@ create table cv_fichier (
     cv varchar(255) not null,
     certificat varchar(255) not null,
     foreign key (id_cv) references cv(id)
+);
+
+-- MIALY V4
+create table questionnaire (
+    id serial primary key,
+    id_job integer not null,
+    foreign key (id_job) references job(id)
+);
+
+create table question (
+    id serial primary key,
+    id_questionnaire integer not null,
+    contenu text,
+    coeff integer,
+    foreign key (id_questionnaire) references questionnaire(id)
+);
+
+create table reponse (
+    id serial primary key,
+    id_question integer not null,
+    contenu text,
+    valeur boolean,
+    foreign key(id_question) references question(id)
 );

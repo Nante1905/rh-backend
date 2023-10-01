@@ -1,6 +1,7 @@
 package com.example.restapi.model.job;
 
 import com.example.restapi.model.Service;
+import com.example.restapi.model.qcm.Questionnaire;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

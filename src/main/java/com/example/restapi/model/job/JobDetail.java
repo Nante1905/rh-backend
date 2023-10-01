@@ -1,6 +1,7 @@
 package com.example.restapi.model.job;
 
 import com.example.restapi.model.Service;
+import com.example.restapi.model.qcm.Questionnaire;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -48,6 +49,18 @@ public class JobDetail {
     @OneToOne
     @JoinColumn(name = "id")
     JobSexe jobSexe;
+
+    @OneToOne
+    @JoinColumn(name = "id")
+    Questionnaire questionnaire;
+
+    public Questionnaire getQuestionnaire() {
+        return questionnaire;
+    }
+
+    public void setQuestionnaire(Questionnaire questionnaire) {
+        this.questionnaire = questionnaire;
+    }
 
     public JobSexe getJobSexe() {
         return jobSexe;

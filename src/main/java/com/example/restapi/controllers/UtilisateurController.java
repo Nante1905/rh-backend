@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.restapi.model.Utilisateur;
+import com.example.restapi.model.cv.Cv;
+import com.example.restapi.model.cv.DetailsCv;
+import com.example.restapi.services.CVService;
 import com.example.restapi.services.UtilisateurService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class UtilisateurController {
     @Autowired
     UtilisateurService uService;
+    @Autowired
+    CVService cvService;
 
     @GetMapping()
     public List<Utilisateur> findAll() {
@@ -28,6 +33,11 @@ public class UtilisateurController {
     @PostMapping(value = "sign")
     public Utilisateur signIn(@RequestBody Utilisateur u) {
         return this.uService.save(u);
+    }
+
+    @PostMapping(value = "cv/create")
+    public void createCV(@RequestBody DetailsCv cv) {
+        this.cvService.save(cv);
     }
 
 }

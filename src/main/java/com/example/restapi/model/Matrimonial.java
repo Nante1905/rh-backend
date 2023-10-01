@@ -1,18 +1,22 @@
 package com.example.restapi.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
-public class Sexe {
+@Table(name = "matrimoniale")
+public class Matrimonial {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idmatrimoniale")
     int id;
-    String nom;
+    String situation;
 
-    public Sexe() {
+    public Matrimonial() {
     }
 
     public int getId() {
@@ -23,12 +27,12 @@ public class Sexe {
         this.id = id;
     }
 
-    public String getNom() {
-        return nom;
+    public String getSituation() {
+        return situation;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setSituation(String situation) {
+        this.situation = situation;
     }
 
 }

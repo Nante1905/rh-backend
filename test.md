@@ -11,3 +11,16 @@
   }
 }
 ```
+
+DATA POUR CREER CV
+
+```json
+{
+  "nom": "Mireille_cv_1",
+  "utilisateur": { "id": 1 },
+  "diplome": { "diplome": { "id": 2 } },
+  "domaine": { "domaine": { "id": 1 } },
+  "matrimonial": { "matrimonial": { "id": 1 } },
+  "experience": { "experience": { "id": 1 } }
+}
+```

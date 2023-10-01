@@ -7,14 +7,15 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Nationalite {
+public class Experience {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idnationalite")
+    @Column(name = "idexperience")
     int id;
-    String nationalite;
+    String experience;
+    int valeur;
 
-    public Nationalite() {
+    public Experience() {
     }
 
     public int getId() {
@@ -25,12 +26,20 @@ public class Nationalite {
         this.id = id;
     }
 
-    public String getNationalite() {
-        return nationalite;
+    public String getExperience() {
+        return experience;
     }
 
-    public void setNationalite(String nationalite) {
-        this.nationalite = nationalite;
+    public void setExperience(String experience) {
+        this.experience = experience;
+    }
+
+    public int getValeur() {
+        return valeur;
+    }
+
+    public void setValeur(int valeur) {
+        this.valeur = valeur;
     }
 
 }

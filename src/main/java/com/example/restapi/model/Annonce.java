@@ -1,10 +1,12 @@
 package com.example.restapi.model;
 
+import com.example.restapi.model.job.Job;
+
 public class Annonce {
     int id;
     int idJob;
     Job job;
-    
+
     public Annonce(int id, int idJob, Job job) {
         this.id = id;
         this.idJob = idJob;

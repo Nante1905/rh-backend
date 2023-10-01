@@ -1,4 +1,6 @@
-package com.example.restapi.model;
+package com.example.restapi.model.job;
+
+import com.example.restapi.model.Service;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -9,9 +11,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 
 @Entity
-public class Job {
+@Table(name = "job")
+public class JobDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idjob")
@@ -38,17 +42,7 @@ public class Job {
         this.jobDiplome = jobDiplome;
     }
 
-    public Job() {
-    }
-
-    public Job(int idJob, String title, double volume, int man_day, double sal_min, double sal_max, Service service) {
-        this.idJob = idJob;
-        this.title = title;
-        this.volume = volume;
-        this.man_day = man_day;
-        this.sal_min = sal_min;
-        this.sal_max = sal_max;
-        this.service = service;
+    public JobDetail() {
     }
 
     public int getIdJob() {
@@ -106,5 +100,4 @@ public class Job {
     public void setService(Service service) {
         this.service = service;
     }
-
 }

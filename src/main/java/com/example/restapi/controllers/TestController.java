@@ -18,8 +18,6 @@ import com.example.restapi.repositories.job.JobDetailRepository;
 import com.example.restapi.repositories.job.JobRepository;
 import com.example.restapi.services.job.JobService;
 
-import jakarta.persistence.EntityManager;
-
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/test")

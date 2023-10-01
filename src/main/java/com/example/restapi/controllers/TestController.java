@@ -19,6 +19,7 @@ import com.example.restapi.repositories.job.JobRepository;
 import com.example.restapi.services.job.JobService;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/test")
 public class TestController {
 
@@ -29,7 +30,6 @@ public class TestController {
     @Autowired
     private JobDetailRepository jobDetailRepository;
 
-    @CrossOrigin(origins = "*")
     @GetMapping("")
     public List<JobDetail> getEmployes() {
         return jobDetailRepository.findAll();

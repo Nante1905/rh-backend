@@ -8,13 +8,13 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Job {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idjob")
+    @Column(name = "id")
     int idJob;
     String title;
     double volume;
@@ -22,7 +22,7 @@ public class Job {
     double sal_min;
     double sal_max;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "idservice")
     Service service;
 

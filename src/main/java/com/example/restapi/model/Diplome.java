@@ -11,7 +11,8 @@ public class Diplome {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "iddiplome")
-    int idDiplome;
+    int id;
+
     String nom;
     int valeur;
 
@@ -19,17 +20,17 @@ public class Diplome {
     }
 
     public Diplome(int idDiplome, String nom, int valeur) {
-        this.idDiplome = idDiplome;
+        this.id = idDiplome;
         this.nom = nom;
         this.valeur = valeur;
     }
 
-    public int getIdDiplome() {
-        return idDiplome;
+    public int getId() {
+        return id;
     }
 
-    public void setIdDiplome(int idDiplome) {
-        this.idDiplome = idDiplome;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNom() {

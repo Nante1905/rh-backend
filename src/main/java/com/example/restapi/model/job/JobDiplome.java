@@ -1,13 +1,9 @@
 package com.example.restapi.model.job;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
-
 import com.example.restapi.model.Diplome;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
@@ -17,7 +13,7 @@ import jakarta.persistence.Table;
 @Table(name = "job_diplome")
 public class JobDiplome {
     @Id
-    @Column(name = "idjobfk")
+    @Column(name = "id_job")
     int idJob;
 
     @OneToOne
@@ -25,12 +21,19 @@ public class JobDiplome {
     Diplome diplome;
 
     int coeff;
+
     // int idDiplome;
 
     // public JobDiplome(Diplome diplome, int coeff) {
     // this.diplome = diplome;
     // this.coeff = coeff;
     // }
+
+    public JobDiplome(int idJob, Diplome diplome, int coeff) {
+        this.setIdJob(idJob);
+        this.setDiplome(diplome);
+        this.setCoeff(coeff);
+    }
 
     public JobDiplome() {
     }

@@ -2,7 +2,6 @@ package com.example.restapi.model.job;
 
 import com.example.restapi.model.Service;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,7 +17,7 @@ import jakarta.persistence.Table;
 public class JobDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idjob")
+    @Column(name = "id")
     int idJob;
     String title;
     double volume;
@@ -30,9 +29,57 @@ public class JobDetail {
     @JoinColumn(name = "idservice")
     Service service;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idjob", referencedColumnName = "idjobfk")
+    @OneToOne
+    @JoinColumn(name = "id")
     JobDiplome jobDiplome;
+
+    @OneToOne
+    @JoinColumn(name = "id", referencedColumnName = "id_job")
+    JobExperience jobExperience;
+
+    @OneToOne
+    @JoinColumn(name = "id")
+    JobMatrimoniale jobMatrimoniale;
+
+    @OneToOne
+    @JoinColumn(name = "id")
+    JobNationalite jobNationalite;
+
+    @OneToOne
+    @JoinColumn(name = "id")
+    JobSexe jobSexe;
+
+    public JobSexe getJobSexe() {
+        return jobSexe;
+    }
+
+    public void setJobSexe(JobSexe jobSexe) {
+        this.jobSexe = jobSexe;
+    }
+
+    public JobNationalite getJobNationalite() {
+        return jobNationalite;
+    }
+
+    public void setJobNationalite(JobNationalite jobNationalite) {
+        this.jobNationalite = jobNationalite;
+    }
+
+    public JobMatrimoniale getJobMatrimoniale() {
+        return jobMatrimoniale;
+    }
+
+    public void setJobMatrimoniale(JobMatrimoniale jobMatrimoniale) {
+        this.jobMatrimoniale = jobMatrimoniale;
+    }
+
+    public JobExperience getJobExperience() {
+        return jobExperience;
+    }
+
+    public void setJobExperience(JobExperience jobExperience) {
+        this.jobExperience = jobExperience;
+    }
 
     public JobDiplome getJobDiplome() {
         return jobDiplome;

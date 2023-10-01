@@ -2,8 +2,6 @@ package com.example.restapi.model.cv;
 
 import java.time.LocalDate;
 
-import org.hibernate.annotations.ColumnDefault;
-
 import com.example.restapi.model.Utilisateur;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -14,7 +12,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 
 @Entity
 public class Cv {

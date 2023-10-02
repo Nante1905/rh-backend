@@ -71,35 +71,43 @@ public class CVService {
     @Transactional(rollbackOn = { Exception.class })
     public void save(DetailsCv cv, MultipartFile cvFile, MultipartFile certificat)
             throws Exception {
-        Cv toInsert = new Cv(cv.getNom(), cv.getUtilisateur());
-        Cv inserted = this.cvRepository.save(toInsert);
+        try {
+            Cv toInsert = new Cv(cv.getNom(), cv.getUtilisateur());
+            Cv inserted = this.cvRepository.save(toInsert);
 
-        String cvName = inserted.getUtilisateur().generateFileName(cvFile.getOriginalFilename(),
-                "cv");
-        String certificatName = inserted.getUtilisateur().generateFileName(certificat.getOriginalFilename(),
-                "certificat");
-        // cv_diplome
-        CvDiplome diplome = cv.getDiplome();
-        diplome.setIdCv(inserted.getId());
-        entityManager.persist(diplome);
-        // cv_domaine
-        CvDomaine domaine = cv.getDomaine();
-        domaine.setIdCv(inserted.getId());
-        entityManager.persist(domaine);
-        // cv_matrimonial
-        CvMatrimonial matrimonial = cv.getMatrimonial();
-        matrimonial.setIdCv(inserted.getId());
-        entityManager.persist(matrimonial);
-        // cv_experience
-        CvExperience experience = cv.getExperience();
-        experience.setIdCv(inserted.getId());
-        entityManager.persist(experience);
+            String cvName = inserted.getUtilisateur().generateFileName(cvFile.getOriginalFilename(),
+                    "cv");
+            String certificatName = inserted.getUtilisateur().generateFileName(certificat.getOriginalFilename(),
+                    "certificat");
 
-        // cv_file
-        CvFichier fichier = new CvFichier(cvName, certificatName);
-        entityManager.persist(fichier);
-        fileService.save(cvFile, cvName);
-        fileService.save(certificat, certificatName);
+            System.out.println(" after insert >>>>> " + inserted);
+
+            // cv_diplome
+            CvDiplome diplome = cv.getDiplome();
+            diplome.setIdCv(inserted.getId());
+            entityManager.persist(diplome);
+            // cv_domaine
+            CvDomaine domaine = cv.getDomaine();
+            domaine.setIdCv(inserted.getId());
+            entityManager.persist(domaine);
+            // cv_matrimonial
+            CvMatrimonial matrimonial = cv.getMatrimonial();
+            matrimonial.setIdCv(inserted.getId());
+            entityManager.persist(matrimonial);
+            // cv_experience
+            CvExperience experience = cv.getExperience();
+            experience.setIdCv(inserted.getId());
+            entityManager.persist(experience);
+
+            // cv_file
+            CvFichier fichier = new CvFichier(cvName, certificatName);
+            fichier.setIdCv(inserted.getId());
+            entityManager.persist(fichier);
+            fileService.save(cvFile, cvName);
+            fileService.save(certificat, certificatName);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     public Optional<DetailsCv> findById(int id) {

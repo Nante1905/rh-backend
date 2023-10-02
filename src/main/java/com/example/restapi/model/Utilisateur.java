@@ -2,6 +2,7 @@ package com.example.restapi.model;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 
 import com.example.restapi.customException.FileException;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -51,7 +52,8 @@ public class Utilisateur {
         if (extension.compareTo("pdf") != 0) {
             throw new FileException(originalName + " doit être un pdf");
         }
-        return this.getNom() + "_" + type + "_" + LocalDateTime.now().toString() + "." + extension;
+        return this.getId() + "_" + type + "_" + LocalDateTime.now().toEpochSecond(ZoneOffset.UTC) + "."
+                + extension;
     }
 
     public int getId() {

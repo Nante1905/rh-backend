@@ -1,13 +1,16 @@
 package com.example.restapi.model.job;
 
 import com.example.restapi.model.Diplome;
+import com.example.restapi.model.Domaine;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "job_diplome")
@@ -19,9 +22,11 @@ public class JobDiplome {
     @OneToOne
     @JoinColumn(name = "iddiplome")
     Diplome diplome;
-
     int coeff;
 
+    @OneToOne
+    @JoinColumn(name = "id_domaine")
+    Domaine domaine;
     // int idDiplome;
 
     // public JobDiplome(Diplome diplome, int coeff) {
@@ -60,5 +65,13 @@ public class JobDiplome {
 
     public void setIdJob(int idJob) {
         this.idJob = idJob;
+    }
+
+    public Domaine getDomaine() {
+        return domaine;
+    }
+
+    public void setDomaine(Domaine domaine) {
+        this.domaine = domaine;
     }
 }

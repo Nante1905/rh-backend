@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Transient;
 
 @Entity
 public class CvMatrimonial {
@@ -14,6 +15,8 @@ public class CvMatrimonial {
     @ManyToOne
     @JoinColumn(name = "id_matrimonial")
     Matrimonial matrimonial;
+    @Transient
+    boolean valide;
 
     public CvMatrimonial() {
     }
@@ -32,6 +35,14 @@ public class CvMatrimonial {
 
     public void setMatrimonial(Matrimonial matrimonial) {
         this.matrimonial = matrimonial;
+    }
+
+    public boolean isValide() {
+        return valide;
+    }
+
+    public void setValide(boolean valide) {
+        this.valide = valide;
     }
 
 }

@@ -46,6 +46,10 @@ public class JobService {
         return this.jobDetailRepository.findAll();
     }
 
+    public Optional<JobDetail> findById(int id) {
+        return this.jobDetailRepository.findById(id);
+    }
+
     @Transactional(rollbackOn = { Exception.class })
     public Optional<JobDetail> save(JobDetail jobDetail) throws Exception {
         Job job = new Job(jobDetail.getTitle(), jobDetail.getVolume(), jobDetail.getMan_day(),

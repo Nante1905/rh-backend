@@ -14,9 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.restapi.model.job.JobDetail;
+import com.example.restapi.model.job.JobDiplome;
 import com.example.restapi.repositories.job.JobDetailRepository;
 import com.example.restapi.repositories.job.JobRepository;
 import com.example.restapi.services.job.JobService;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -29,6 +34,8 @@ public class TestController {
     private JobService jobService;
     @Autowired
     private JobDetailRepository jobDetailRepository;
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @GetMapping("")
     public List<JobDetail> getEmployes() {
@@ -50,6 +57,12 @@ public class TestController {
         // result.put("data", e);
         // return new ResponseEntity<HashMap<String, Object>>(result, HttpStatus.OK);
         // }
+    }
+
+    @PostMapping("/test")
+    @Transactional
+    public void save(@RequestBody JobDiplome diplome) {
+        entityManager.persist(diplome);
     }
 
 }

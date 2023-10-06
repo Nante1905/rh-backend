@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Transient;
 
 @Entity
 public class CvDiplome {
@@ -14,8 +15,18 @@ public class CvDiplome {
     @ManyToOne
     @JoinColumn(name = "id_diplome")
     Diplome diplome;
+    @Transient
+    boolean valide;
 
     public CvDiplome() {
+    }
+
+    public boolean isValide() {
+        return valide;
+    }
+
+    public void setValide(boolean valide) {
+        this.valide = valide;
     }
 
     public String toString() {

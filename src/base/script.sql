@@ -186,9 +186,10 @@ create table candidature(
     id serial primary key,
     id_job integer not null,
     id_cv integer not null,
-    depot date not null,
+    depot date default now() not null,
     foreign key (id_job) references job(id),
     foreign key (id_cv) references cv(id)
 );
 
 alter table job add column jour date default now();
+alter table cv_fichier rename column cv to diplome;

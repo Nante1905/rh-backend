@@ -177,3 +177,18 @@ create table reponse (
     valeur boolean,
     foreign key(id_question) references question(id)
 );
+
+-- Nante: auth module
+create table role (
+    id serial primary key,
+    nom varchar(100)
+);
+
+create table utilisateur_role (
+    id serial primary key,
+    id_role int references role(id),
+    id_utilisateur int references utilisateur(id)
+);
+
+alter table utilisateur add username varchar(200) unique;
+alter table utilisateur add mot_de_passe text;

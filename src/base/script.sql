@@ -195,3 +195,5 @@ create table candidature(
     foreign key (id_job) references job(id),
     foreign key (id_cv) references cv(id)
 );
+
+alter table job add column jour date default now();

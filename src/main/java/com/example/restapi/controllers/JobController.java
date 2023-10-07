@@ -2,6 +2,7 @@ package com.example.restapi.controllers;
 
 import com.example.restapi.model.Candidature;
 import com.example.restapi.model.job.JobDetail;
+import com.example.restapi.model.job.JobInfo;
 import com.example.restapi.services.CandidatureService;
 import com.example.restapi.services.job.JobService;
 
@@ -56,5 +57,10 @@ public class JobController {
         System.out.println(">>>> " + id);
         List<Candidature> list = this.candidatureService.findAllSortByNoteFor(id);
         return ResponseEntity.ok().body(list);
+    }
+
+    @GetMapping(path = "/annonce")
+    public ResponseEntity<List<JobInfo>> findAnnonces() {
+        return ResponseEntity.ok().body(this.jobService.findJobInfo());
     }
 }

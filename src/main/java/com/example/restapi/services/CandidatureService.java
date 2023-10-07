@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.restapi.model.Candidature;
+import com.example.restapi.model.candidature.Candidature;
 import com.example.restapi.repositories.candidature.CandidatureRepository;
 
 @Service

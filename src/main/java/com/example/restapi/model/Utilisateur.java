@@ -6,6 +6,7 @@ import java.time.ZoneOffset;
 
 import com.example.restapi.customException.FileException;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,6 +29,7 @@ public class Utilisateur {
     LocalDate naissance;
     String email;
     String telephone;
+    @JsonIgnore
     String mdp;
     @ManyToOne
     @JoinColumn(name = "id_ville")

@@ -1,4 +1,4 @@
-package com.example.restapi.model;
+package com.example.restapi.model.candidature;
 
 import java.time.LocalDate;
 import java.util.List;

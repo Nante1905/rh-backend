@@ -1,6 +1,7 @@
 package com.example.restapi.controllers;
 
-import com.example.restapi.model.Candidature;
+import com.example.restapi.model.candidature.Candidature;
+import com.example.restapi.model.candidature.CandidatureInfo;
 import com.example.restapi.model.job.JobDetail;
 import com.example.restapi.model.job.JobInfo;
 import com.example.restapi.services.CandidatureService;
@@ -8,6 +9,7 @@ import com.example.restapi.services.job.JobService;
 
 import jakarta.websocket.server.PathParam;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -45,18 +47,28 @@ public class JobController {
         return ResponseEntity.ok().body(job);
     }
 
-    @GetMapping(path = "/candidature/{id}")
-    public ResponseEntity<List<Candidature>> findCandidatureOf(@PathVariable("id") int id) {
-        System.out.println(">>>> " + id);
+    @GetMapping(path = "/{id}/candidatures")
+    public ResponseEntity<List<CandidatureInfo>> findCandidatureOf(@PathVariable("id") int id) {
+        System.out.println(" candidature of >>>> " + id);
         List<Candidature> list = this.candidatureService.findAllFor(id);
-        return ResponseEntity.ok().body(list);
+        List<CandidatureInfo> res = new ArrayList<CandidatureInfo>();
+
+        list.stream().forEach((c) -> {
+            res.add(new CandidatureInfo(c));
+        });
+        return ResponseEntity.ok().body(res);
     }
 
-    @GetMapping(path = "/candidature/sort/{id}")
-    public ResponseEntity<List<Candidature>> findSortedCandidatureOf(@PathVariable("id") int id) {
-        System.out.println(">>>> " + id);
+    @GetMapping(path = "/{id}/selections")
+    public ResponseEntity<List<CandidatureInfo>> findSortedCandidatureOf(@PathVariable("id") int id) {
+        System.out.println(" sélections >>>> " + id);
         List<Candidature> list = this.candidatureService.findAllSortByNoteFor(id);
-        return ResponseEntity.ok().body(list);
+        List<CandidatureInfo> res = new ArrayList<CandidatureInfo>();
+
+        list.stream().forEach((c) -> {
+            res.add(new CandidatureInfo(c));
+        });
+        return ResponseEntity.ok().body(res);
     }
 
     @GetMapping(path = "/annonce")

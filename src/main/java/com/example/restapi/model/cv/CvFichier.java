@@ -7,14 +7,14 @@ import jakarta.persistence.Id;
 public class CvFichier {
     @Id
     int idCv;
-    String cv;
+    String diplome;
     String certificat;
 
     public CvFichier() {
     }
 
-    public CvFichier(String cv, String certificat) {
-        setCv(cv);
+    public CvFichier(String diplome, String certificat) {
+        setDiplome(diplome);
         setCertificat(certificat);
     }
 
@@ -26,20 +26,20 @@ public class CvFichier {
         this.idCv = idCv;
     }
 
-    public String getCv() {
-        return cv;
-    }
-
-    public void setCv(String cv) {
-        this.cv = cv;
-    }
-
     public String getCertificat() {
         return certificat;
     }
 
     public void setCertificat(String certificat) {
         this.certificat = certificat;
+    }
+
+    public String getDiplome() {
+        return diplome;
+    }
+
+    public void setDiplome(String diplome) {
+        this.diplome = diplome;
     }
 
 }

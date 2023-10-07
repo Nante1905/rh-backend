@@ -3,7 +3,6 @@ package com.example.restapi.model.job;
 import java.time.LocalDate;
 
 import com.example.restapi.model.Service;
-import com.example.restapi.model.qcm.Questionnaire;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -28,7 +27,7 @@ public class Job {
     LocalDate jour;
 
     @OneToOne
-    @JoinColumn(name = "idservice")
+    @JoinColumn(name = "id_service")
     Service service;
 
     public Job() {

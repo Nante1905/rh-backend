@@ -9,21 +9,21 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 
 @Entity
-public class JobMatrimoniale {
+public class JobMatrimonial {
     @Id
     @Column(name = "id_job")
     int idJob;
 
     @OneToOne
-    @JoinColumn(name = "idmatrimoniale")
+    @JoinColumn(name = "id_matrimonial")
     Matrimonial matrimonial;
 
     int coeff;
 
-    public JobMatrimoniale() {
+    public JobMatrimonial() {
     }
 
-    public JobMatrimoniale(int idJob, Matrimonial matrimonial, int coeff) {
+    public JobMatrimonial(int idJob, Matrimonial matrimonial, int coeff) {
         this.setIdJob(idJob);
         this.setMatrimonial(matrimonial);
         this.setCoeff(coeff);

@@ -10,7 +10,7 @@ import jakarta.persistence.Id;
 public class Diplome {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "iddiplome")
+    @Column(name = "id")
     int id;
 
     String nom;

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.restapi.config.Props;
 import com.example.restapi.model.Utilisateur;
-import com.example.restapi.model.cv.DetailsCv;
 import com.example.restapi.services.CVService;
 import com.example.restapi.services.UtilisateurService;
 

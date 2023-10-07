@@ -15,7 +15,7 @@ public class JobSexe {
     int idJob;
 
     @OneToOne
-    @JoinColumn(name = "idsexe")
+    @JoinColumn(name = "id_sexe")
     Genre genre;
 
     int coeff;

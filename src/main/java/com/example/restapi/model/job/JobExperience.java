@@ -15,7 +15,7 @@ public class JobExperience {
     int idJob;
 
     @OneToOne
-    @JoinColumn(name = "idexperience")
+    @JoinColumn(name = "id_experience")
     Experience experience;
 
     int coeff;

@@ -19,12 +19,10 @@ INSERT INTO ville (nom) VALUES
     ('Vangaindrano'),
     ('Antsohihy'),
     ('Antalaha');
+INSERT INTO sexe (nom) values 
+    ('Homme'),
+    ('Femme');
 
-INSERT INTO utilisateur (nom, prenom, naissance, telephone, email, mdp, idville) VALUES
-    ('Razafindramanitra', 'Mireille', '1990-03-15', '0321234567', 'mireille@gmail.com', 'Mireille', 1, 2),
-    ('Rakotoarison', 'Andry', '1985-06-20', '0342345678', 'andry@gmail.com', 'Andry', 1, 1),
-    ('Rasolondraibe', 'Feno', '1992-09-30', '0333456789', 'feno@gmail.com', 'Feno', 2, 1),
-    ('Rajaonarison', 'Tsiry', '1988-12-12', '0324567890', 'tsiry@gmail.com', 'Tsiry', 2);
 
 INSERT INTO service (nom_service) VALUES
     ('Direction des Ressources Humaines'),
@@ -37,7 +35,7 @@ INSERT INTO diplome (nom, valeur) VALUES
     ('Licence', 2),
     ('Master', 3),
     ('Doctorat', 4);
-INSERT INTO matrimoniale (situation) VALUES
+INSERT INTO matrimonial (situation) VALUES
     ('Célibataire'),
     ('Marié'),
     ('Divorcé'),
@@ -52,9 +50,6 @@ INSERT INTO experience (experience, valeur) VALUES
     ('Etranger'),
     ('National');
 
-    INSERT INTO sexe (nom) values 
-    ('Homme'),
-    ('Femme');
 
 INSERT INTO domaine (nom) VALUES
     ('Informatique'),
@@ -67,3 +62,9 @@ INSERT INTO domaine (nom) VALUES
     ('Sciences politiques'),
     ('Biologie'),
     ('Arts plastiques');
+
+INSERT INTO utilisateur (nom, prenom, naissance, telephone, email, mdp, id_ville, id_nationalite, id_sexe) VALUES
+    ('Razafindramanitra', 'Mireille', '1990-03-15', '0321234567', 'mireille@gmail.com', 'Mireille', 3, 2,1),
+    ('Rakotoarison', 'Andry', '1985-06-20', '0342345678', 'andry@gmail.com', 'Andry', 3, 1,2),
+    ('Rasolondraibe', 'Feno', '1992-09-30', '0333456789', 'feno@gmail.com', 'Feno', 2, 2,1),
+    ('Rajaonarison', 'Tsiry', '1988-12-12', '0324567890', 'tsiry@gmail.com', 'Tsiry', 2, 1,2);

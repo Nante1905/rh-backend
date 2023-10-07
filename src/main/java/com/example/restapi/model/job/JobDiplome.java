@@ -17,7 +17,7 @@ public class JobDiplome {
     int idJob;
 
     @OneToOne
-    @JoinColumn(name = "iddiplome")
+    @JoinColumn(name = "id_diplome")
     Diplome diplome;
 
     int coeff;

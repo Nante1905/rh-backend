@@ -27,7 +27,7 @@ public class JobDetail {
     double sal_max;
 
     @ManyToOne
-    @JoinColumn(name = "idservice")
+    @JoinColumn(name = "id_service")
     Service service;
 
     @OneToOne
@@ -40,7 +40,7 @@ public class JobDetail {
 
     @OneToOne
     @JoinColumn(name = "id")
-    JobMatrimoniale jobMatrimoniale;
+    JobMatrimonial jobMatrimoniale;
 
     @OneToOne
     @JoinColumn(name = "id")
@@ -78,11 +78,11 @@ public class JobDetail {
         this.jobNationalite = jobNationalite;
     }
 
-    public JobMatrimoniale getJobMatrimoniale() {
+    public JobMatrimonial getJobMatrimoniale() {
         return jobMatrimoniale;
     }
 
-    public void setJobMatrimoniale(JobMatrimoniale jobMatrimoniale) {
+    public void setJobMatrimoniale(JobMatrimonial jobMatrimoniale) {
         this.jobMatrimoniale = jobMatrimoniale;
     }
 

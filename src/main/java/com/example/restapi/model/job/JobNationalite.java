@@ -15,7 +15,7 @@ public class JobNationalite {
     int idJob;
 
     @OneToOne
-    @JoinColumn(name = "idnationalite")
+    @JoinColumn(name = "id_nationalite")
     Nationalite nationalite;
 
     int coeff;

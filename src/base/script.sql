@@ -8,11 +8,11 @@ create table ville (
 
 
 CREATE TABLE sexe (
-    idSexe SERIAL PRIMARY KEY,
-    valeur INTEGER
+    id SERIAL PRIMARY KEY,
+    nom varchar(50)
 );
 CREATE TABLE nationalite (
-    idNationalite SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     nationalite VARCHAR(20)
 );
 
@@ -28,8 +28,8 @@ create table utilisateur (
     id_sexe integer not null,
     id_nationalite integer not null,
     foreign key(id_ville) references ville (id),
-    foreign key(id_sexe) references sexe (idSexe),
-    foreign key(id_nationalite) references nationalite (idNationalite)
+    foreign key(id_sexe) references sexe (id),
+    foreign key(id_nationalite) references nationalite (id)
 );
 
 CREATE TABLE service (
@@ -43,8 +43,8 @@ CREATE TABLE job (
     man_day INTEGER,
     sal_min NUMERIC,
     sal_max NUMERIC,
-    idService integer,
-    FOREIGN KEY(idService) REFERENCES service(id)
+    id_service integer,
+    FOREIGN KEY(id_service) REFERENCES service(id)
 );
 -- MIALY V3: 
 
@@ -55,57 +55,57 @@ create table domaine (
 
 -- ---------------
 CREATE TABLE diplome (
-    idDiplome SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     nom varchar(100),
     valeur integer
 );
-CREATE TABLE sexe (
-    idSexe SERIAL PRIMARY KEY,
-    nom VARCHAR(20)
-);
-CREATE TABLE matrimoniale (
-    idMatrimoniale SERIAL PRIMARY KEY,
+-- CREATE TABLE sexe (
+--     idSexe SERIAL PRIMARY KEY,
+--     nom VARCHAR(20)
+-- );
+CREATE TABLE matrimonial (
+    id SERIAL PRIMARY KEY,
     situation VARCHAR(20)
 );
 CREATE TABLE experience (
-    idExperience SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     experience VARCHAR(20),
     valeur INTEGER
 );
 CREATE TABLE job_diplome (
     id_job integer,
-    idDiplome integer,
+    id_diplome integer,
     coeff INTEGER,
     FOREIGN KEY(id_job) REFERENCES job(id),
-    FOREIGN KEY(idDiplome) REFERENCES diplome(idDiplome)
+    FOREIGN KEY(id_diplome) REFERENCES diplome(id)
 );
 CREATE TABLE job_sexe (
-   id_job integer,
-    idSexe integer,
-    coeff INTEGER,
-    FOREIGN KEY(id_job) REFERENCES job(id),
-    FOREIGN KEY(idSexe) REFERENCES sexe(idSexe)
-);
-CREATE TABLE job_matrimoniale (
     id_job integer,
-    idMatrimoniale integer,\
+    id_sexe integer,
     coeff INTEGER,
     FOREIGN KEY(id_job) REFERENCES job(id),
-    FOREIGN KEY(idMatrimoniale) REFERENCES matrimoniale(idMatrimoniale)
+    FOREIGN KEY(id_sexe) REFERENCES sexe(id)
+);
+CREATE TABLE job_matrimonial (
+    id_job integer,
+    id_matrimonial integer,
+    coeff INTEGER,
+    FOREIGN KEY(id_job) REFERENCES job(id),
+    FOREIGN KEY(id_matrimonial) REFERENCES matrimonial(id)
 );
 CREATE TABLE job_experience (
     id_job integer,
-    idExperience integer,
+    id_experience integer,
     coeff INTEGER,
     FOREIGN KEY(id_job) REFERENCES job(id),
-    FOREIGN KEY(idExperience) REFERENCES experience(idExperience)
+    FOREIGN KEY(id_experience) REFERENCES experience(id)
 );
 CREATE TABLE job_nationalite (
     id_job integer,
-    idNationalite integer,
+    id_nationalite integer,
     coeff INTEGER,
     FOREIGN KEY(id_job) REFERENCES job(id),
-    FOREIGN KEY(idNationalite) REFERENCES nationalite(idNationalite)
+    FOREIGN KEY(id_nationalite) REFERENCES nationalite(id)
 );
 
 create table cv (
@@ -113,17 +113,12 @@ create table cv (
     id_utilisateur integer not null,
     nom varchar(255),
     creation date default now(),
-    foreign key (idutilisateur) references utilisateur(id)
+    foreign key (id_utilisateur) references utilisateur(id)
 );
 
 -- alter table cv alter column creation set default now();
 
 -- MIALY V3: 
-
-create table domaine (
-    id serial primary key,
-    nom varchar(200)
-);
 
 create table cv_domaine (
     id_cv integer not null,
@@ -136,21 +131,21 @@ create table cv_diplome (
     id_cv integer not null,
     id_diplome integer not null,
     foreign key (id_cv) references cv(id),
-    foreign key (id_diplome) references diplome(id_diplome)
+    foreign key (id_diplome) references diplome(id)
 );
 
 create table cv_matrimonial (
     id_cv integer not null,
     id_matrimonial integer not null,
     foreign key (id_cv) references cv(id),
-    foreign key (id_matrimonial) references matrimoniale(idMatrimoniale)
+    foreign key (id_matrimonial) references matrimonial(id)
 );
 
 create table cv_experience (
     id_cv integer not null,
     id_experience integer not null,
     foreign key (id_cv) references cv(id),
-    foreign key (id_experience) references experience(idExperience)
+    foreign key (id_experience) references experience(id)
 );
 
 create table cv_fichier (

@@ -10,7 +10,7 @@ import com.example.restapi.model.job.Job;
 import com.example.restapi.model.job.JobDetail;
 import com.example.restapi.model.job.JobDiplome;
 import com.example.restapi.model.job.JobExperience;
-import com.example.restapi.model.job.JobMatrimoniale;
+import com.example.restapi.model.job.JobMatrimonial;
 import com.example.restapi.model.job.JobNationalite;
 import com.example.restapi.model.job.JobSexe;
 import com.example.restapi.model.qcm.Question;
@@ -65,7 +65,7 @@ public class JobService {
         jobExperience.setIdJob(job.getIdJob());
         this.manager.persist(jobExperience);
 
-        JobMatrimoniale jobMatrimoniale = jobDetail.getJobMatrimoniale();
+        JobMatrimonial jobMatrimoniale = jobDetail.getJobMatrimoniale();
         jobMatrimoniale.setIdJob(job.getIdJob());
         this.manager.persist(jobMatrimoniale);
 

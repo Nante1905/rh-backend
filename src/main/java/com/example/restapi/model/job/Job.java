@@ -1,7 +1,6 @@
 package com.example.restapi.model.job;
 
 import com.example.restapi.model.Service;
-import com.example.restapi.model.qcm.Questionnaire;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,7 +23,7 @@ public class Job {
     double sal_max;
 
     @OneToOne
-    @JoinColumn(name = "idservice")
+    @JoinColumn(name = "id_service")
     Service service;
 
     public Job() {

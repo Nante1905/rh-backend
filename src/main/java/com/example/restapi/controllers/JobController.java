@@ -13,8 +13,6 @@ import com.example.restapi.services.job.JobService;
 import com.example.restapi.services.qcm.QuestionnaireService;
 import com.example.restapi.services.qcm.TestService;
 
-import jakarta.websocket.server.PathParam;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,14 +24,13 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin(origins = "*")
 @RequestMapping("/job")
+@CrossOrigin("*")
 public class JobController {
     @Autowired
     JobService jobService;

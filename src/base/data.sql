@@ -69,4 +69,13 @@ INSERT INTO utilisateur (nom, prenom, naissance, telephone, email, mdp, id_ville
     ('Rasolondraibe', 'Feno', '1992-09-30', '0333456789', 'feno@gmail.com', 'Feno', 2, 2,1),
     ('Rajaonarison', 'Tsiry', '1988-12-12', '0324567890', 'tsiry@gmail.com', 'Tsiry', 2, 1,2);
 
-insert into test(id_candidature, id_questionnaire, )
+INSERT into role (nom) values
+('ADMIN'),
+('PUBLIC'),
+('EMPLOYE');
+
+insert into utilisateur_role (id_role, id_utilisateur) values 
+(1, 1);
+
+UPDATE utilisateur set username='test' where id=1;
+UPDATE utilisateur set mot_de_passe=MD5('test') where id=1;

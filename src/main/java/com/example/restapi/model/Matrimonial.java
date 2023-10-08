@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "matrimonial")
@@ -13,6 +14,8 @@ public class Matrimonial {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
     String situation;
+    @Transient
+    boolean valide;
 
     public Matrimonial() {
     }
@@ -31,6 +34,14 @@ public class Matrimonial {
 
     public void setSituation(String situation) {
         this.situation = situation;
+    }
+
+    public boolean isValide() {
+        return valide;
+    }
+
+    public void setValide(boolean valide) {
+        this.valide = valide;
     }
 
 }

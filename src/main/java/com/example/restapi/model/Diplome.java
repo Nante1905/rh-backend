@@ -19,6 +19,10 @@ public class Diplome {
     public Diplome() {
     }
 
+    public boolean isSup(int valeur) {
+        return this.getValeur() >= valeur;
+    }
+
     public Diplome(int idDiplome, String nom, int valeur) {
         this.id = idDiplome;
         this.nom = nom;

@@ -1,5 +1,7 @@
 package com.example.restapi.model.job;
 
+import java.time.LocalDate;
+
 import com.example.restapi.model.Service;
 
 import jakarta.persistence.Column;
@@ -21,6 +23,8 @@ public class Job {
     int man_day;
     double sal_min;
     double sal_max;
+    @Column(insertable = false)
+    LocalDate jour;
 
     @OneToOne
     @JoinColumn(name = "id_service")
@@ -92,6 +96,14 @@ public class Job {
 
     public void setService(Service service) {
         this.service = service;
+    }
+
+    public LocalDate getJour() {
+        return jour;
+    }
+
+    public void setJour(LocalDate jour) {
+        this.jour = jour;
     }
 
 }

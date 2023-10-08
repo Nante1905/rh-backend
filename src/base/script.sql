@@ -178,6 +178,22 @@ create table reponse (
     foreign key(id_question) references question(id)
 );
 
+-- POUR SELECTION DOSSIER
+alter table job_diplome add column id_domaine integer;
+alter table job_diplome add foreign key(id_domaine) references domaine(id);
+
+create table candidature(
+    id serial primary key,
+    id_job integer not null,
+    id_cv integer not null,
+    depot date default now() not null,
+    foreign key (id_job) references job(id),
+    foreign key (id_cv) references cv(id)
+);
+
+alter table job add column jour date default now();
+alter table cv_fichier rename column cv to diplome;
+
 -- Nante: auth module
 create table role (
     id serial primary key,

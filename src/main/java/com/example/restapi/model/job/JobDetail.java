@@ -1,5 +1,7 @@
 package com.example.restapi.model.job;
 
+import java.time.LocalDate;
+
 import com.example.restapi.model.Service;
 import com.example.restapi.model.qcm.Questionnaire;
 
@@ -25,6 +27,8 @@ public class JobDetail {
     int man_day;
     double sal_min;
     double sal_max;
+    @Column(insertable = false)
+    LocalDate jour;
 
     @ManyToOne
     @JoinColumn(name = "id_service")
@@ -159,5 +163,13 @@ public class JobDetail {
 
     public void setService(Service service) {
         this.service = service;
+    }
+
+    public LocalDate getJour() {
+        return jour;
+    }
+
+    public void setJour(LocalDate jour) {
+        this.jour = jour;
     }
 }

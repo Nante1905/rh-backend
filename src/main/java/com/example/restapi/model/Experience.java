@@ -16,6 +16,10 @@ public class Experience {
     public Experience() {
     }
 
+    public boolean isSup(int valeur) {
+        return this.getValeur() >= valeur;
+    }
+
     public int getId() {
         return id;
     }

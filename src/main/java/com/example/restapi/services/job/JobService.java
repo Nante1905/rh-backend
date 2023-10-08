@@ -4,12 +4,14 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.restapi.model.job.Job;
 import com.example.restapi.model.job.JobDetail;
 import com.example.restapi.model.job.JobDiplome;
 import com.example.restapi.model.job.JobExperience;
+import com.example.restapi.model.job.JobInfo;
 import com.example.restapi.model.job.JobMatrimonial;
 import com.example.restapi.model.job.JobNationalite;
 import com.example.restapi.model.job.JobSexe;
@@ -17,6 +19,7 @@ import com.example.restapi.model.qcm.Question;
 import com.example.restapi.model.qcm.Questionnaire;
 import com.example.restapi.model.qcm.Reponse;
 import com.example.restapi.repositories.job.JobDetailRepository;
+import com.example.restapi.repositories.job.JobInfoRepository;
 import com.example.restapi.repositories.job.JobRepository;
 import com.example.restapi.repositories.qcm.QuestionRepository;
 import com.example.restapi.repositories.qcm.QuestionnaireRepository;
@@ -41,9 +44,19 @@ public class JobService {
     QuestionRepository questionRepository;
     @Autowired
     ReponseRepository reponseRepository;
+    @Autowired
+    JobInfoRepository jobInfoRepository;
 
     public List<JobDetail> findAll() {
         return this.jobDetailRepository.findAll();
+    }
+
+    public Optional<JobDetail> findById(int id) {
+        return this.jobDetailRepository.findById(id);
+    }
+
+    public List<JobInfo> findJobInfo() {
+        return this.jobInfoRepository.findAll(Sort.by("jour").ascending());
     }
 
     @Transactional(rollbackOn = { Exception.class })

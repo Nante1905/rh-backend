@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Transient;
 
 @Entity
 public class CvExperience {
@@ -14,6 +15,8 @@ public class CvExperience {
     @ManyToOne
     @JoinColumn(name = "id_experience")
     Experience experience;
+    @Transient
+    boolean valide;
 
     public CvExperience() {
     }
@@ -32,6 +35,14 @@ public class CvExperience {
 
     public void setExperience(Experience experience) {
         this.experience = experience;
+    }
+
+    public boolean isValide() {
+        return valide;
+    }
+
+    public void setValide(boolean valide) {
+        this.valide = valide;
     }
 
 }

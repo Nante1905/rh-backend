@@ -8,6 +8,7 @@ import java.util.List;
 import com.example.restapi.customException.FileException;
 import com.example.restapi.model.users.Role;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -34,6 +35,7 @@ public class Utilisateur {
     LocalDate naissance;
     String email;
     String telephone;
+    @JsonIgnore
     String mdp;
     @ManyToOne
     @JoinColumn(name = "id_ville")

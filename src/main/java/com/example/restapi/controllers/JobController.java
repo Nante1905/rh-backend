@@ -1,16 +1,6 @@
 package com.example.restapi.controllers;
 
-import com.example.restapi.model.candidature.Candidature;
-import com.example.restapi.model.candidature.CandidatureInfo;
-import com.example.restapi.model.job.JobDetail;
-import com.example.restapi.model.job.JobInfo;
-import com.example.restapi.services.CandidatureService;
-import com.example.restapi.services.job.JobService;
-
-import jakarta.websocket.server.PathParam;
-
 import java.util.ArrayList;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -23,6 +13,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.restapi.model.candidature.Candidature;
+import com.example.restapi.model.candidature.CandidatureInfo;
+import com.example.restapi.model.job.JobDetail;
+import com.example.restapi.model.job.JobInfo;
+import com.example.restapi.services.CandidatureService;
 import com.example.restapi.services.job.JobService;
 
 @RestController

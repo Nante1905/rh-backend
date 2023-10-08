@@ -2,9 +2,7 @@ package com.example.restapi.model.candidature;
 
 import java.time.LocalDate;
 
-import com.example.restapi.model.Diplome;
 import com.example.restapi.model.Domaine;
-import com.example.restapi.model.Experience;
 import com.example.restapi.model.Matrimonial;
 import com.example.restapi.model.Utilisateur;
 import com.example.restapi.model.cv.CvDiplome;

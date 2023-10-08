@@ -1,10 +1,7 @@
 package com.example.restapi.model.candidature;
 
 import java.time.LocalDate;
-import java.util.List;
 
-import com.example.restapi.model.cv.CvDiplome;
-import com.example.restapi.model.cv.CvDomaine;
 import com.example.restapi.model.cv.DetailsCv;
 import com.example.restapi.model.job.JobDetail;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -15,7 +12,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Transient;
 
 @Entity

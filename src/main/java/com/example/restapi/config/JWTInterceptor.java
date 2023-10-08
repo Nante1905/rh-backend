@@ -42,9 +42,6 @@ public class JWTInterceptor extends OncePerRequestFilter {
                 // authToken.setAuthenticated(true);
 
                 SecurityContextHolder.getContext().setAuthentication(authToken);
-                System.out.println(
-                        "debug ================= valide token "
-                                + SecurityContextHolder.getContext().getAuthentication());
             } catch (Exception e) {
                 throw e;
             }

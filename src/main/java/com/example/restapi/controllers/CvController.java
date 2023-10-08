@@ -18,9 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.restapi.model.Nationalite;
+import com.example.restapi.model.Utilisateur;
 import com.example.restapi.model.cv.DetailsCv;
 import com.example.restapi.services.CVService;
 import com.example.restapi.services.FileService;
+import com.example.restapi.services.UtilisateurService;
 
 @RestController
 @RequestMapping(value = "/cv")
@@ -30,6 +32,8 @@ public class CvController {
     CVService cvService;
     @Autowired
     FileService fileService;
+    @Autowired
+    UtilisateurService utilisateurService;
 
     @GetMapping("{id}")
     public Optional<DetailsCv> find(@PathVariable(name = "id") int id) {
@@ -70,10 +74,13 @@ public class CvController {
             @RequestPart(value = "cv") MultipartFile cvFile,
             @RequestPart(value = "certificat") MultipartFile certificat) {
         try {
+            Utilisateur current = this.utilisateurService.getAuthenticatedUser().get();
+            cvInfo.getUtilisateur().setId(current.getId());
             this.cvService.save(cvInfo, cvFile, certificat);
             return ResponseEntity.ok().body(new HashMap<>().put("OK", true));
         } catch (Exception e) {
             e.printStackTrace();
+            System.out.println("cv err");
             return ResponseEntity.internalServerError().body(new HashMap<>().put("message", e.getMessage()));
         }
     }

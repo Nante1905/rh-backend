@@ -208,3 +208,10 @@ create table utilisateur_role (
 
 alter table utilisateur add username varchar(200) unique;
 alter table utilisateur add mot_de_passe text;
+
+-- form fixing and dynamic
+alter table utilisateur add id_service int references service(id);
+
+-- update table candidature
+-- 0->en attente, 1->test, 2->entretien, 3->embauche
+alter table candidature add status int;

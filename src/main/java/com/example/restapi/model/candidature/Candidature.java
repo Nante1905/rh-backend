@@ -4,7 +4,6 @@ import java.time.LocalDate;
 
 import com.example.restapi.model.cv.DetailsCv;
 import com.example.restapi.model.job.JobDetail;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,12 +24,13 @@ public class Candidature {
     @ManyToOne
     @JoinColumn(name = "id_cv", insertable = false)
     DetailsCv cv;
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_job", insertable = false)
     JobDetail job;
     @Transient
     double note;
+
+    int status;
 
     public Candidature() {
     }
@@ -122,6 +122,14 @@ public class Candidature {
 
     public double getNote() {
         return note;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
 }

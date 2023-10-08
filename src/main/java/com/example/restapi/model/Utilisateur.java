@@ -20,6 +20,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 
 /**
  * Utilisateur
@@ -46,6 +47,10 @@ public class Utilisateur {
     @ManyToOne
     @JoinColumn(name = "id_sexe")
     Genre genre;
+
+    @OneToOne
+    @JoinColumn(name = "id_service")
+    Service service;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "utilisateur_role", joinColumns = @JoinColumn(name = "id_utilisateur"), inverseJoinColumns = @JoinColumn(name = "id_role"))
@@ -175,6 +180,14 @@ public class Utilisateur {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Service getService() {
+        return service;
+    }
+
+    public void setService(Service service) {
+        this.service = service;
     }
 
 }

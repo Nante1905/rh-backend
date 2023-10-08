@@ -47,4 +47,10 @@ public class UtilisateurService {
         return this.uRepository
                 .findUtilisateurByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
     }
+
+    public com.example.restapi.model.Service getAuhtenticatedService() throws Exception {
+        Utilisateur current = getAuthenticatedUser().orElseThrow(() -> new Exception("No authenticated user"));
+        System.out.println(current.getEmail());
+        return current.getService();
+    }
 }

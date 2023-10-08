@@ -25,7 +25,7 @@ public class Question {
     // int idQuestionnaire;
     String contenu;
     int coeff;
-    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "question", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @OrderBy("id ASC")
     List<Reponse> reponses;
     @JsonIgnore

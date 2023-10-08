@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.example.restapi.model.Utilisateur;
 import com.example.restapi.model.job.Job;
 import com.example.restapi.model.job.JobDetail;
 import com.example.restapi.model.job.JobDiplome;
@@ -24,6 +25,7 @@ import com.example.restapi.repositories.job.JobRepository;
 import com.example.restapi.repositories.qcm.QuestionRepository;
 import com.example.restapi.repositories.qcm.QuestionnaireRepository;
 import com.example.restapi.repositories.qcm.ReponseRepository;
+import com.example.restapi.services.UtilisateurService;
 
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
@@ -46,6 +48,8 @@ public class JobService {
     ReponseRepository reponseRepository;
     @Autowired
     JobInfoRepository jobInfoRepository;
+    @Autowired
+    UtilisateurService utilisateurService;
 
     public List<JobDetail> findAll() {
         return this.jobDetailRepository.findAll();
@@ -109,4 +113,8 @@ public class JobService {
         return this.jobDetailRepository.findById(job.getIdJob());
     }
 
+    public List<JobDetail> findJobNotApplied() throws Exception {
+        Utilisateur u = this.utilisateurService.getAuthenticatedUser().get();
+        return this.jobDetailRepository.findJobNotApplied(u.getId());
+    }
 }

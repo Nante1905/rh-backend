@@ -10,6 +10,7 @@ import com.example.restapi.services.job.JobService;
 import jakarta.websocket.server.PathParam;
 
 import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -22,9 +23,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.restapi.services.job.JobService;
+
 @RestController
-@CrossOrigin(origins = "*")
 @RequestMapping("/job")
+@CrossOrigin("*")
 public class JobController {
     @Autowired
     JobService jobService;

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.restapi.config.Props;
 import com.example.restapi.model.Utilisateur;
 import com.example.restapi.services.CVService;
 import com.example.restapi.services.UtilisateurService;
@@ -26,7 +25,6 @@ public class UtilisateurController {
 
     @GetMapping()
     public List<Utilisateur> findAll() {
-        System.out.println(Props.getResourceFolder());
         return this.uService.findAll();
     }
 

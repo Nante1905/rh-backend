@@ -3,16 +3,22 @@ package com.example.restapi.model;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.util.List;
 
 import com.example.restapi.customException.FileException;
+import com.example.restapi.model.users.Role;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 
 /**
@@ -40,6 +46,15 @@ public class Utilisateur {
     @ManyToOne
     @JoinColumn(name = "id_sexe")
     Genre genre;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "utilisateur_role", joinColumns = @JoinColumn(name = "id_utilisateur"), inverseJoinColumns = @JoinColumn(name = "id_role"))
+    List<Role> roles;
+
+    String username;
+
+    @Column(name = "mot_de_passe")
+    String password;
 
     public Utilisateur() {
     }
@@ -136,6 +151,30 @@ public class Utilisateur {
 
     public void setGenre(Genre genre) {
         this.genre = genre;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
 }

@@ -95,7 +95,7 @@ public class JobService {
         this.manager.persist(jobSexe);
 
         final Questionnaire qcm = jobDetail.getQuestionnaire();
-        // System.out.println("from front >>>> " + qcm.toString());
+        System.out.println("from front >>>> " + qcm.toString());
         qcm.setIdJob(job.getIdJob());
         qcm.getQuestions().stream().forEach((q) -> {
             q.setQuestionnaire(qcm);

@@ -36,8 +36,6 @@ public class Utilisateur {
     LocalDate naissance;
     String email;
     String telephone;
-    @JsonIgnore
-    String mdp;
     @ManyToOne
     @JoinColumn(name = "id_ville")
     Ville ville;
@@ -124,14 +122,6 @@ public class Utilisateur {
 
     public void setTelephone(String telephone) {
         this.telephone = telephone;
-    }
-
-    public String getMdp() {
-        return mdp;
-    }
-
-    public void setMdp(String mdp) {
-        this.mdp = mdp;
     }
 
     public Ville getVille() {

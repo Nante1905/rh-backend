@@ -1,13 +1,23 @@
 package com.example.restapi.model.qcm;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.example.restapi.services.qcm.QuestionnaireService;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OrderBy;
+import jakarta.persistence.Transient;
 
 @Entity
 public class Questionnaire {
@@ -15,9 +25,9 @@ public class Questionnaire {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
     int idJob;
-    @OneToMany
-    @JoinColumn(name = "id", insertable = false, updatable = false)
-    List<Question> questions;
+    @OneToMany(mappedBy = "questionnaire", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OrderBy("id ASC")
+    Set<Question> questions = new HashSet<>();
 
     public String toString() {
         return this.getId() + " job " + this.getIdJob();
@@ -39,11 +49,11 @@ public class Questionnaire {
         this.idJob = idJob;
     }
 
-    public List<Question> getQuestions() {
-        return questions;
+    public Set<Question> getQuestions() {
+        return this.questions;
     }
 
-    public void setQuestions(List<Question> questions) {
+    public void setQuestions(Set<Question> questions) {
         this.questions = questions;
     }
 

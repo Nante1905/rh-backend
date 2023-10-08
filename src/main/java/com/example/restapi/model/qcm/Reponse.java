@@ -1,18 +1,29 @@
 package com.example.restapi.model.qcm;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Reponse {
+    @JsonProperty("index")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
     String contenu;
     boolean valeur;
-    int idQuestion;
+    // int idQuestion;
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_question")
+    Question question;
 
     public int getId() {
         return id;
@@ -38,12 +49,12 @@ public class Reponse {
         this.valeur = valeur;
     }
 
-    public int getIdQuestion() {
-        return idQuestion;
+    public Question getQuestion() {
+        return question;
     }
 
-    public void setIdQuestion(int idQuestion) {
-        this.idQuestion = idQuestion;
+    public void setQuestion(Question question) {
+        this.question = question;
     }
 
 }

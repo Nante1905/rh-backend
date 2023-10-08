@@ -20,7 +20,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.restapi.model.Utilisateur;
 import com.example.restapi.model.job.JobDetail;
 import com.example.restapi.model.job.JobDiplome;
+import com.example.restapi.model.qcm.Questionnaire;
 import com.example.restapi.repositories.job.JobDetailRepository;
+import com.example.restapi.repositories.job.JobRepository;
+import com.example.restapi.repositories.qcm.QuestionnaireRepository;
 import com.example.restapi.services.UtilisateurService;
 import com.example.restapi.services.authentication.JWTManager;
 import com.example.restapi.services.job.JobService;
@@ -42,6 +45,8 @@ public class TestController {
     private JobDetailRepository jobDetailRepository;
     @PersistenceContext
     private EntityManager entityManager;
+    @Autowired
+    QuestionnaireRepository qRepository;
 
     @Autowired
     private JWTManager jwt;
@@ -79,6 +84,17 @@ public class TestController {
     @Transactional
     public void save(@RequestBody JobDiplome diplome) {
         entityManager.persist(diplome);
+    }
+
+    @PostMapping("qcm")
+    public Questionnaire save(@RequestBody Questionnaire q) {
+        q.getQuestions().stream().forEach((quest) -> {
+            quest.setQuestionnaire(q);
+            quest.getReponses().stream().forEach((rep) -> {
+                rep.setQuestion(quest);
+            });
+        });
+        return this.qRepository.save(q);
     }
 
 }

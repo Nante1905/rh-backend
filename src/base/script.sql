@@ -186,7 +186,7 @@ create table candidature(
     id serial primary key,
     id_job integer not null,
     id_cv integer not null,
-    depot date default now() not null,
+    depot date not null default now() ,
     foreign key (id_job) references job(id),
     foreign key (id_cv) references cv(id)
 );
@@ -194,6 +194,20 @@ create table candidature(
 alter table job add column jour date default now();
 alter table cv_fichier rename column cv to diplome;
 
+-- MODULE TEST
+create table test (
+    id serial primary key,
+    id_questionnaire integer not null references questionnaire(id),
+    jour date not null default now()
+);
+
+create table test_reponse (
+    id serial primary key,
+    id_test integer not null references test(id),
+    id_question integer not null references question(id),
+    id_reponse integer not null references reponse(id),
+    valeur boolean not null default false
+);
 -- Nante: auth module
 create table role (
     id serial primary key,
@@ -215,3 +229,4 @@ alter table utilisateur add id_service int references service(id);
 -- update table candidature
 -- 0->en attente, 1->test, 2->entretien, 3->embauche
 alter table candidature add status int;
+alter table utilisateur drop column mdp;

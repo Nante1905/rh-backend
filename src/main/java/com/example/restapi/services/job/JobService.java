@@ -94,22 +94,17 @@ public class JobService {
         jobSexe.setIdJob(job.getIdJob());
         this.manager.persist(jobSexe);
 
-        Questionnaire qcm = jobDetail.getQuestionnaire();
+        final Questionnaire qcm = jobDetail.getQuestionnaire();
         // System.out.println("from front >>>> " + qcm.toString());
         qcm.setIdJob(job.getIdJob());
-        qcm = questionnaireRepository.save(qcm);
-        // System.out.println(" >>>>> after insert >>>>> " + qcm.toString());
-        System.out.println(qcm.getQuestions().size());
-        for (Question q : qcm.getQuestions()) {
-            q.setIdQuestionnaire(qcm.getId());
-            q = questionRepository.save(q);
-            // System.out.println(" after insert >>>>> " + q.toString());
-            for (Reponse r : q.getReponses()) {
-                // System.out.println("R ID " + r.getId());
-                r.setIdQuestion(q.getId());
-            }
-            reponseRepository.saveAll(q.getReponses());
-        }
+        qcm.getQuestions().stream().forEach((q) -> {
+            q.setQuestionnaire(qcm);
+            q.getReponses().stream().forEach((rep) -> {
+                rep.setQuestion(q);
+            });
+        });
+        questionnaireRepository.save(qcm);
+
         return this.jobDetailRepository.findById(job.getIdJob());
     }
 

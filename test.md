@@ -24,3 +24,29 @@ DATA POUR CREER CV
   "experience": { "experience": { "id": 1 } }
 }
 ```
+
+j'ai une table test_reponse(id_test, id_question, id_reponse, valeurcandidat) telle que
+-id_test a une relation n:1 avec table test
+-id_question a une relation n:1 avec la table question (contenu
+-id_reponse a une relation n:1 avec table reponse (contenu, valeur)
+une question a plusieurs réponses c-a-d on a une répétitiond e id-question et id_test pour des id_reponse différents
+
+J'utilise spring boot. Aide moi à former mes classes de telle sortes que lorsque je donne un id_test j'ai un truc du genre
+{ [
+question: {
+contenu: 'question',
+reponses: [
+{
+rep: {
+contenu: 'reponse',
+valeur: boolean ,
+},
+valeurCandidat: boolean
+},
+{
+rep: {
+contenu: 'reponse',
+valeur: boolean ,
+},
+valeurCandidat: boolean
+}]

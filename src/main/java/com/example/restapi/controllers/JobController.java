@@ -4,8 +4,14 @@ import com.example.restapi.model.candidature.Candidature;
 import com.example.restapi.model.candidature.CandidatureInfo;
 import com.example.restapi.model.job.JobDetail;
 import com.example.restapi.model.job.JobInfo;
+import com.example.restapi.model.qcm.Question;
+import com.example.restapi.model.qcm.Questionnaire;
+import com.example.restapi.model.qcm.test.Test;
+import com.example.restapi.repositories.qcm.TestRepository;
 import com.example.restapi.services.CandidatureService;
 import com.example.restapi.services.job.JobService;
+import com.example.restapi.services.qcm.QuestionnaireService;
+import com.example.restapi.services.qcm.TestService;
 
 import jakarta.websocket.server.PathParam;
 
@@ -19,6 +25,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,6 +39,12 @@ public class JobController {
     JobService jobService;
     @Autowired
     CandidatureService candidatureService;
+    @Autowired
+    QuestionnaireService questionnaireService;
+    @Autowired
+    TestRepository testRepository;
+    @Autowired
+    TestService testService;
 
     @GetMapping
     public ResponseEntity<HashMap<String, Object>> findAll() {
@@ -74,5 +89,35 @@ public class JobController {
     @GetMapping(path = "/annonce")
     public ResponseEntity<List<JobInfo>> findAnnonces() {
         return ResponseEntity.ok().body(this.jobService.findJobInfo());
+    }
+
+    @GetMapping(path = "/{id}/questionnaires")
+    public ResponseEntity<Questionnaire> findQuestionnaire(@PathVariable("id") int idJob) {
+        return ResponseEntity.ok().body(this.questionnaireService.findByIdJob(idJob));
+    }
+
+    @GetMapping(path = "/questionnaires")
+    public ResponseEntity<List<Questionnaire>> findAllQuestionnaire() {
+        return ResponseEntity.ok().body(this.questionnaireService.findAllQuestionnaire());
+    }
+
+    @GetMapping(path = "/questions/{id}")
+    public ResponseEntity<List<Question>> findQuestion(@PathVariable("id") int id) {
+        return ResponseEntity.ok().body(this.questionnaireService.findQuestions(id));
+    }
+
+    @GetMapping(path = "/tests/{test}")
+    public List<Test> findTest(@PathVariable("test") int idTest) {
+        return testRepository.findById(idTest);
+    }
+
+    @PostMapping(path = "/tests")
+    public ResponseEntity<Object> saveTest(@RequestBody Test test) {
+        try {
+            return ResponseEntity.ok().body(this.testService.save(test));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("Erreur lors de l'insertion test");
+        }
     }
 }

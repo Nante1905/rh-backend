@@ -20,6 +20,7 @@ public class CandidatureDto {
     LocalDate depot;
     int id_cv;
     int id_job;
+    int status = 0;
 
     public int getId() {
         return id;

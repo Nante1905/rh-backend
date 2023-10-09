@@ -25,7 +25,7 @@ public class Questionnaire {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
     int idJob;
-    @OneToMany(mappedBy = "questionnaire", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "questionnaire", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @OrderBy("id ASC")
     Set<Question> questions = new HashSet<>();
 

@@ -25,11 +25,11 @@ public class Question {
     // int idQuestionnaire;
     String contenu;
     int coeff;
-    @OneToMany(mappedBy = "question", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @OrderBy("id ASC")
     List<Reponse> reponses;
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_questionnaire")
     Questionnaire questionnaire;
 

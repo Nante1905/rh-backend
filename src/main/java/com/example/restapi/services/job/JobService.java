@@ -98,13 +98,16 @@ public class JobService {
         System.out.println("from front >>>> " + qcm.toString());
         qcm.setIdJob(job.getIdJob());
         qcm.getQuestions().stream().forEach((q) -> {
+            System.out.println("id tonga aty " + q.getId());
+            q.setId(0);
             q.setQuestionnaire(qcm);
             q.getReponses().stream().forEach((rep) -> {
+                rep.setId(0);
                 rep.setQuestion(q);
             });
         });
-        questionnaireRepository.save(qcm);
-
+        Questionnaire t = questionnaireRepository.save(qcm);
+        System.out.println(">>> " + t.getQuestions().size());
         return this.jobDetailRepository.findById(job.getIdJob());
     }
 

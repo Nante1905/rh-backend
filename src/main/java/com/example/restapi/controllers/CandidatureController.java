@@ -2,6 +2,7 @@ package com.example.restapi.controllers;
 
 import java.io.FileNotFoundException;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,6 +31,27 @@ public class CandidatureController {
 
     @Autowired
     CandidatureService candidatureService;
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateCandidatureStatus(@PathVariable(name = "id") int idCandidature,
+            @RequestBody Map<String, Object> body) {
+        HashMap<String, Object> res = new HashMap<>();
+        int newStatus = (int) body.get("status");
+        try {
+            if (idCandidature <= 0 || newStatus < 0) {
+                throw new Exception("No candidature or status supplied");
+            }
+            this.candidatureService.updateCandidatureStatus(idCandidature, newStatus);
+            res.put("OK", true);
+            res.put("message", "Candidature mis a jour");
+            return ResponseEntity.ok().body(res);
+        } catch (Exception e) {
+            res.put("OK", false);
+            res.put("message", e.getMessage());
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().body(res);
+        }
+    }
 
     @GetMapping(path = "docs/{name}")
     @ResponseBody
@@ -50,6 +73,8 @@ public class CandidatureController {
     @PostMapping
     public ResponseEntity<?> save(@RequestBody CandidatureDto candidature) {
         HashMap<String, Object> res = new HashMap<>();
+        System.out.println("debug ==================================== ");
+
         try {
             this.candidatureService.save(candidature);
             res.put("OK", true);

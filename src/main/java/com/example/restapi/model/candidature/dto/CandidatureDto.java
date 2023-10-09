@@ -54,4 +54,12 @@ public class CandidatureDto {
         this.depot = depot;
     }
 
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
 }

@@ -105,8 +105,24 @@ public class JobController {
     }
 
     @GetMapping(path = "/{id}/questionnaires")
-    public ResponseEntity<Questionnaire> findQuestionnaire(@PathVariable("id") int idJob) {
-        return ResponseEntity.ok().body(this.questionnaireService.findByIdJob(idJob));
+    public ResponseEntity<?> findQuestionnaire(@PathVariable("id") int idJob) {
+        try {
+            return ResponseEntity.ok().body(this.questionnaireService.findByIdJob(idJob));
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+    }
+
+    @GetMapping(path = "{id}/tests")
+    public ResponseEntity<?> findTestOf(@PathVariable("id") int id) {
+        try {
+            return ResponseEntity.ok().body(this.testService.findTestOf(id));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
     }
 
     @GetMapping(path = "/questionnaires")

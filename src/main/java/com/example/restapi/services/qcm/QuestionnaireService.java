@@ -20,7 +20,7 @@ public class QuestionnaireService {
     @Autowired
     QuestionRepository questionRepository;
 
-    public Questionnaire findByIdJob(int idJob) {
+    public Questionnaire findByIdJob(int idJob) throws Exception {
         List<Questionnaire> q = this.qRepository.findByIdJob(idJob);
         if (q.size() == 0) {
             return null;

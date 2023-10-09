@@ -45,6 +45,10 @@ public class CandidatureService {
         }
     }
 
+    public void updateCandidatureStatus(int idCandidature, int newStatus) throws Exception {
+        this.candidatureDtoRepository.updateCandidatureStatus(idCandidature, newStatus);
+    }
+
     public List<Candidature> findByIdUser(int idUser) throws Exception {
         return cRepository.findByIdUtilisateur(idUser);
     }

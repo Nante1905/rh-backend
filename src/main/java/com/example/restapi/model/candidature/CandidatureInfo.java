@@ -19,6 +19,7 @@ public class CandidatureInfo {
     CvExperience experience;
     CvFichier fichier;
     double note;
+    int status;
 
     public CandidatureInfo(Candidature model) {
         // CandidatureInfo c = new CandidatureInfo();
@@ -31,6 +32,7 @@ public class CandidatureInfo {
         this.setExperience(model.getCv().getExperience());
         this.setFichier(model.getCv().getFichier());
         this.setNote(model.getNote());
+        this.setStatus(model.getStatus());
     }
 
     public int getId() {
@@ -103,6 +105,14 @@ public class CandidatureInfo {
 
     public CvDiplome getDiplome() {
         return diplome;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
 }

@@ -20,6 +20,7 @@ public class CandidatureDto {
     LocalDate depot;
     int id_cv;
     int id_job;
+    int status = 0;
 
     public int getId() {
         return id;
@@ -51,6 +52,14 @@ public class CandidatureDto {
 
     public void setDepot(LocalDate depot) {
         this.depot = depot;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
 }

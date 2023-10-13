@@ -79,3 +79,8 @@ insert into utilisateur_role (id_role, id_utilisateur) values
 
 UPDATE utilisateur set username='test' where id=1;
 UPDATE utilisateur set mot_de_passe=MD5('test') where id=1;
+
+insert into type_contrat (type_contrat) values
+('CDI'),
+('CDD'),
+('CTT');

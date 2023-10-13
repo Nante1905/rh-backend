@@ -37,7 +37,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(req -> {
                     req
                             .requestMatchers("/auth/**").permitAll()
-                            .anyRequest().authenticated();
+                            .anyRequest().permitAll();
                 })
                 .httpBasic(Customizer.withDefaults());
         http.addFilterBefore(jwtInterceptor(), UsernamePasswordAuthenticationFilter.class);

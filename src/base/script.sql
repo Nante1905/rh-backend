@@ -208,3 +208,21 @@ create table utilisateur_role (
 
 alter table utilisateur add username varchar(200) unique;
 alter table utilisateur add mot_de_passe text;
+
+--Bidy : type contrat 
+create table type_contrat (
+    id serial primary key,
+    type_contrat varchar(100) not null
+);
+
+-- Bidy : modif job
+alter table job add id_type_contrat integer;
+alter table job add nbr_personne integer;
+alter table job add min_age integer;
+alter table job add max_age integer;
+alter table job add id_ville integer;
+alter table job add foreign key(id_type_contrat) references type_contrat(id);
+alter table job add foreign key(id_ville) references ville(id);
+alter table job add man_day integer;
+--ALTER TABLE job DROP COLUMN man_day;
+

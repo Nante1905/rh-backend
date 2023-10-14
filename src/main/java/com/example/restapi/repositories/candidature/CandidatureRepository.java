@@ -15,4 +15,6 @@ public interface CandidatureRepository extends JpaRepository<Candidature, Intege
     @Query(value = "select ca.* from candidature ca join cv on ca.id_cv=cv.id join job on ca.id_job=job.id where id_utilisateur=?1", nativeQuery = true)
     public List<Candidature> findByIdUtilisateur(int idUser);
 
+    @Query(value = "SELECT * FROM candidature c WHERE c.id_job = :idJob and c.status = :status", nativeQuery = true)
+    public List<Candidature> findByStatus(int idJob, int status);
 }

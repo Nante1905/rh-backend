@@ -68,6 +68,7 @@ public class UtilisateurController {
                 HashMap<String, Object> can = new HashMap<>();
                 can.put("job", c.getJob());
                 can.put("status", c.getStatus());
+                can.put("id", c.getId());
 
                 candidatures.add(can);
                 i = i + 1;

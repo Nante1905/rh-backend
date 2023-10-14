@@ -1,5 +1,6 @@
 package com.example.restapi.services;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.restapi.model.Utilisateur;
 import com.example.restapi.model.candidature.Candidature;
+import com.example.restapi.model.candidature.CandidatureInfo;
 import com.example.restapi.model.candidature.dto.CandidatureDto;
 import com.example.restapi.repositories.candidature.CandidatureDtoRepository;
 import com.example.restapi.repositories.candidature.CandidatureRepository;
@@ -22,6 +24,15 @@ public class CandidatureService {
 
     @Autowired
     UtilisateurService utilisateurService;
+
+    public List<CandidatureInfo> findEntretienFor(int idJob) {
+        List<Candidature> candidatures = this.cRepository.findByStatus(idJob, 2);
+        List<CandidatureInfo> res = new ArrayList<CandidatureInfo>();
+        for (Candidature c : candidatures) {
+            res.add(new CandidatureInfo(c));
+        }
+        return res;
+    }
 
     public List<Candidature> findAllFor(int idJob) {
         List<Candidature> candidatures = this.cRepository.findByIdJob(idJob);
@@ -55,6 +66,7 @@ public class CandidatureService {
 
     public List<Candidature> findForCurrentUser() throws Exception {
         Utilisateur u = this.utilisateurService.getAuthenticatedUser().get();
+        // System.out.println(u.getId() + " ===========================");
         return cRepository.findByIdUtilisateur(u.getId());
     }
 }

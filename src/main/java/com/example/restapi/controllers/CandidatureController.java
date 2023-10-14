@@ -76,6 +76,7 @@ public class CandidatureController {
         System.out.println("debug ==================================== ");
 
         try {
+            candidature.setStatus(0);
             this.candidatureService.save(candidature);
             res.put("OK", true);
             res.put("message", "Candidature cree");

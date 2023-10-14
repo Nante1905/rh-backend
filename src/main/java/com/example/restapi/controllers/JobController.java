@@ -125,6 +125,16 @@ public class JobController {
         }
     }
 
+    @GetMapping(path = "{id}/entretiens")
+    public ResponseEntity<?> findEntretienOf(@PathVariable("id") int id) {
+        try {
+            return ResponseEntity.ok().body(this.candidatureService.findEntretienFor(id));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+    }
+
     @GetMapping(path = "/questionnaires")
     public ResponseEntity<List<Questionnaire>> findAllQuestionnaire() {
         return ResponseEntity.ok().body(this.questionnaireService.findAllQuestionnaire());

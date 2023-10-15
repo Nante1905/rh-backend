@@ -14,3 +14,13 @@ CREATE VIEW v_test_note
    FROM v_test_point v_t
      JOIN test t ON v_t.id_test = t.id
   GROUP BY v_t.id_test, t.id_candidature;
+
+CREATE  VIEW v_test_note_job
+ AS
+ SELECT t_n.id_test,
+    t_n.id_candidat,
+    t_n.note,
+    t_n.total,
+    c.id_job
+   FROM v_test_note t_n
+     JOIN candidature c ON t_n.id_candidat = c.id;

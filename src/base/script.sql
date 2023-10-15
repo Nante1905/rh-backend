@@ -197,7 +197,7 @@ alter table cv_fichier rename column cv to diplome;
 -- MODULE TEST
 create table test (
     id serial primary key,
-    id_questionnaire integer not null references questionnaire(id),
+    id_candidature integer not null references candidature(id),
     jour date not null default now()
 );
 

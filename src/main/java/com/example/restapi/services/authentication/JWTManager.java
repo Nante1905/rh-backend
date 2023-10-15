@@ -6,8 +6,11 @@ import java.util.Date;
 
 import javax.crypto.spec.SecretKeySpec;
 
+import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.stereotype.Component;
+
+import com.example.restapi.model.Utilisateur;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

@@ -230,3 +230,10 @@ alter table utilisateur add id_service int references service(id);
 -- 0->en attente, 1->test, 2->entretien, 3->embauche
 alter table candidature add status int;
 alter table utilisateur drop column mdp;
+
+-- MODULE EMPLOYE: MIALISOA
+create table employe (
+    id serial primary key,
+    id_candidature integer not null references candidature(id),
+    matricule VARCHAR(10) not null unique
+);

@@ -40,7 +40,7 @@ public class UtilisateurService {
         // verify user in db
         Utilisateur utilisateur = findUtilisateurByUsernameAndPassword(user.getUsername(), user.getPassword())
                 .orElseThrow(() -> new Exception("Identifiants invalides"));
-        return jwt.generateToken(utilisateur.getUsername());
+        return jwt.generateToken(utilisateur);
     }
 
     public Optional<Utilisateur> getAuthenticatedUser() {

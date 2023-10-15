@@ -22,13 +22,14 @@ public class JWTManager {
     private static final Key key = new SecretKeySpec(Base64.getDecoder().decode(secret),
             SignatureAlgorithm.HS256.getJcaName());
 
-    public String generateToken(String username) {
+    public String generateToken(Utilisateur utilisateur) {
         Date currentDate = new Date();
 
         String token = Jwts.builder()
-                .setSubject(username)
+                .setSubject(utilisateur.getUsername())
                 .setIssuedAt(currentDate)
                 .setExpiration(new Date(currentDate.getTime() + dayToMs(1)))
+                .claim("roles", utilisateur.generateStringRoles())
                 .signWith(key)
                 .compact();
         return token;

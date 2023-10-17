@@ -30,6 +30,7 @@ public class JobDetail {
     int nbr_personne;
     int min_age;
     int max_age;
+    String mission;
     double sal_min;
     double sal_max;
     @Column(insertable = false)
@@ -222,4 +223,13 @@ public class JobDetail {
     public void setMan_day(int man_day) {
         this.man_day = man_day;
     }
+
+    public String getMission() {
+        return mission;
+    }
+
+    public void setMission(String mission) {
+        this.mission = mission;
+    }
+
 }

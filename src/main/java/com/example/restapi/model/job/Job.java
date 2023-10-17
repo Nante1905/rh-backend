@@ -26,6 +26,7 @@ public class Job {
     int nbr_personne;
     int min_age;
     int max_age;
+    String mission;
     double sal_min;
     double sal_max;
     @Column(insertable = false)
@@ -45,7 +46,7 @@ public class Job {
 
     public Job(int idJob, String title, double volume, int man_day, double sal_min, double sal_max, Service service,
             LocalDate jour,
-            TypeContrat typecontrat, int nbr_personne, int min_age, int max_age, Ville ville) {
+            TypeContrat typecontrat, int nbr_personne, int min_age, int max_age, Ville ville, String mission) {
         this.idJob = idJob;
         this.title = title;
         this.volume = volume;
@@ -59,6 +60,7 @@ public class Job {
         this.min_age = min_age;
         this.max_age = max_age;
         this.ville = ville;
+        this.mission = mission;
     }
 
     public Job() {
@@ -166,6 +168,10 @@ public class Job {
 
     public void setVille(Ville ville) {
         this.ville = ville;
+    }
+
+    public void setMission(String mission) {
+        this.mission = mission;
     }
 
 }

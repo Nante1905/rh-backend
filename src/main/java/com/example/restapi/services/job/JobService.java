@@ -64,8 +64,8 @@ public class JobService {
         Job job = new Job(0, jobDetail.getTitle(), jobDetail.getVolume(), jobDetail.getMan_day(),
                 jobDetail.getSal_min(), jobDetail.getSal_max(), jobDetail.getService(),
                 null, jobDetail.getTypeContrat(), jobDetail.getNbr_personne(), jobDetail.getMin_age(),
-                jobDetail.getMax_age(), jobDetail.getVille());
-        // System.out.println("JOBSERVICEFRONT => " + jobDetail.getService().getId());
+                jobDetail.getMax_age(), jobDetail.getVille(), jobDetail.getMission());
+        // System.out.println("JOBSERVICEFRONT => " + jobDetail.getMission());
 
         job = this.jobRepository.save(job);
 

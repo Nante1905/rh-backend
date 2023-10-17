@@ -224,5 +224,6 @@ alter table job add id_ville integer;
 alter table job add foreign key(id_type_contrat) references type_contrat(id);
 alter table job add foreign key(id_ville) references ville(id);
 alter table job add man_day integer;
+alter table job add mission VARCHAR(300);
 --ALTER TABLE job DROP COLUMN man_day;
 

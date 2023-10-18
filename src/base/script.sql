@@ -230,11 +230,6 @@ alter table utilisateur add id_service int references service(id);
 -- 0->en attente, 1->test, 2->entretien, 3->embauche
 alter table candidature add status int;
 alter table utilisateur drop column mdp;
---Bidy : type contrat 
-create table type_contrat (
-    id serial primary key,
-    type_contrat varchar(100) not null
-);
 
 -- Bidy : modif job
 alter table job add id_type_contrat integer;
@@ -248,3 +243,64 @@ alter table job add man_day integer;
 alter table job add mission VARCHAR(300);
 --ALTER TABLE job DROP COLUMN man_day;
 
+
+
+-- CONTRAT 
+
+create table type_contrat (
+    id serial primary key,
+    nom varchar(100)
+);
+
+insert into type_contrat (nom) VALUES 
+('Contrat d''essai'),
+('CDD - Contrat à durée déterminée'),
+('CDI - Contrat à durée indéterminée');
+
+CREATE TABLE avantage (
+    id serial primary key,
+    nom varchar(250)
+);
+insert into avantage (nom) VALUES 
+('Assurance santé'),
+('Logement'),
+('Vehiculé');
+
+create table contrat (
+    id serial primary key,
+    id_utilisateur int references utilisateur(id),
+    id_job int references job(id),
+    id_type_contrat int references type_contrat(id),
+    salaire_brut numeric,
+    date_debut date,
+    date_fin date
+);
+
+create table contrat_avantage (
+    id serial primary key,
+    id_contrat int references contrat(id),
+    id_avantage int references avantage(id)
+);
+
+create table categorie (
+    id serial primary key,
+    nom varchar(200),
+    valeur int
+);
+
+insert into categorie (nom, valeur) VALUES
+('1A', 1),
+('1B', 1),
+('2A', 2),
+('2B', 2),
+('3A', 2),
+('3B', 2),
+('4A', 3),
+('4B', 3),
+('5A', 3),
+('5B', 3),
+('HC', 4);
+
+alter TABLE contrat add id_categorie int references categorie(id);
+
+-- =============

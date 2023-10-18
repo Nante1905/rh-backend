@@ -57,7 +57,7 @@ public class JobService {
 
     public Optional<JobDetail> findById(int id) {
         return this.jobDetailRepository.findById(id);
-    }
+    };
 
     public List<JobInfo> findJobInfo() {
         return this.jobInfoRepository.findAll(Sort.by("jour").ascending());
@@ -65,10 +65,11 @@ public class JobService {
 
     @Transactional(rollbackOn = { Exception.class })
     public Optional<JobDetail> save(JobDetail jobDetail) throws Exception {
-        Job job = new Job(jobDetail.getTitle(), jobDetail.getVolume(), jobDetail.getMan_day(),
-                jobDetail.getSal_min(),
-                jobDetail.getSal_max(), jobDetail.getService());
-        // System.out.println("JOBSERVICEFRONT => " + jobDetail.getService().getId());
+        Job job = new Job(0, jobDetail.getTitle(), jobDetail.getVolume(), jobDetail.getMan_day(),
+                jobDetail.getSal_min(), jobDetail.getSal_max(), jobDetail.getService(),
+                null, jobDetail.getTypeContrat(), jobDetail.getNbr_personne(), jobDetail.getMin_age(),
+                jobDetail.getMax_age(), jobDetail.getVille(), jobDetail.getMission());
+        // System.out.println("JOBSERVICEFRONT => " + jobDetail.getMission());
 
         job = this.jobRepository.save(job);
 
@@ -113,6 +114,7 @@ public class JobService {
 
     public List<JobDetail> findJobNotApplied() throws Exception {
         Utilisateur u = this.utilisateurService.getAuthenticatedUser().get();
+        System.out.println("user " + u.getId() + "=================");
         return this.jobDetailRepository.findJobNotApplied(u.getId());
     }
 }

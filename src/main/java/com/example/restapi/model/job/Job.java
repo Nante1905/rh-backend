@@ -3,6 +3,8 @@ package com.example.restapi.model.job;
 import java.time.LocalDate;
 
 import com.example.restapi.model.Service;
+import com.example.restapi.model.contrat.TypeContrat;
+import com.example.restapi.model.Ville;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,6 +23,10 @@ public class Job {
     String title;
     double volume;
     int man_day;
+    int nbr_personne;
+    int min_age;
+    int max_age;
+    String mission;
     double sal_min;
     double sal_max;
     @Column(insertable = false)
@@ -30,16 +36,34 @@ public class Job {
     @JoinColumn(name = "id_service")
     Service service;
 
-    public Job() {
-    }
+    @OneToOne
+    @JoinColumn(name = "id_type_contrat")
+    TypeContrat typecontrat;
 
-    public Job(String title, double volume, int man_day, double sal_min, double sal_max, Service service) {
+    @OneToOne
+    @JoinColumn(name = "id_ville")
+    Ville ville;
+
+    public Job(int idJob, String title, double volume, int man_day, double sal_min, double sal_max, Service service,
+            LocalDate jour,
+            TypeContrat typecontrat, int nbr_personne, int min_age, int max_age, Ville ville, String mission) {
+        this.idJob = idJob;
         this.title = title;
         this.volume = volume;
         this.man_day = man_day;
         this.sal_min = sal_min;
         this.sal_max = sal_max;
         this.service = service;
+        this.jour = jour;
+        this.typecontrat = typecontrat;
+        this.nbr_personne = nbr_personne;
+        this.min_age = min_age;
+        this.max_age = max_age;
+        this.ville = ville;
+        this.mission = mission;
+    }
+
+    public Job() {
     }
 
     public int getIdJob() {
@@ -74,6 +98,30 @@ public class Job {
         this.man_day = man_day;
     }
 
+    public int getNbr_personne() {
+        return nbr_personne;
+    }
+
+    public void setNbr_personne(int nbr_personne) {
+        this.nbr_personne = nbr_personne;
+    }
+
+    public int getMin_age() {
+        return min_age;
+    }
+
+    public void setMin_age(int min_age) {
+        this.min_age = min_age;
+    }
+
+    public int getMax_age() {
+        return max_age;
+    }
+
+    public void setMax_age(int max_age) {
+        this.max_age = max_age;
+    }
+
     public double getSal_min() {
         return sal_min;
     }
@@ -90,6 +138,14 @@ public class Job {
         this.sal_max = sal_max;
     }
 
+    public LocalDate getJour() {
+        return jour;
+    }
+
+    public void setJour(LocalDate jour) {
+        this.jour = jour;
+    }
+
     public Service getService() {
         return service;
     }
@@ -98,12 +154,28 @@ public class Job {
         this.service = service;
     }
 
-    public LocalDate getJour() {
-        return jour;
+    public TypeContrat getTypecontrat() {
+        return typecontrat;
     }
 
-    public void setJour(LocalDate jour) {
-        this.jour = jour;
+    public void setTypecontrat(TypeContrat typecontrat) {
+        this.typecontrat = typecontrat;
+    }
+
+    public Ville getVille() {
+        return ville;
+    }
+
+    public void setVille(Ville ville) {
+        this.ville = ville;
+    }
+
+    public void setMission(String mission) {
+        this.mission = mission;
+    }
+
+    public String getMission() {
+        return mission;
     }
 
 }

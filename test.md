@@ -1,5 +1,26 @@
 ```json
 {
+  "debut": "2023-10-17",
+  "fin": "2023-10-18",
+  "idJob": 1,
+  "idTypeContrat": 1,
+  "salaireBrute": 1234,
+  "categorie": {
+    "id": 1
+  }
+  "avantages": [
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    }
+  ]
+}
+```
+
+```json
+{
   "nom": "Rakoto",
   "prenom": "Jean",
   "naissance": "2003-12-05",

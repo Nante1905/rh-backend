@@ -49,4 +49,8 @@ public class Contrat {
     @OneToOne
     @JoinColumn(name = "id_categorie")
     Categorie categorie;
+
+    LocalDate creation;
+    // 0 -> crée, 3 -> accepter, -3 -> refuser
+    int status;
 }

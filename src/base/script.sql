@@ -252,10 +252,7 @@ create table type_contrat (
     nom varchar(100)
 );
 
-insert into type_contrat (nom) VALUES 
-('Contrat d''essai'),
-('CDD - Contrat à durée déterminée'),
-('CDI - Contrat à durée indéterminée');
+
 
 CREATE TABLE avantage (
     id serial primary key,
@@ -288,19 +285,15 @@ create table categorie (
     valeur int
 );
 
-insert into categorie (nom, valeur) VALUES
-('1A', 1),
-('1B', 1),
-('2A', 2),
-('2B', 2),
-('3A', 2),
-('3B', 2),
-('4A', 3),
-('4B', 3),
-('5A', 3),
-('5B', 3),
-('HC', 4);
-
 alter TABLE contrat add id_categorie int references categorie(id);
+alter table contrat add creation date default now();
+-- 0 -> crée, 3 -> accepter, -3 -> refuser
+alter table contrat add status int;
 
--- =============
+-- EMPLOYE =============
+create table employe (
+    id serial primary key,
+    matricule varchar(10) unique not null,
+    id_utilisateur integer not null references utilisateur(id),
+    id_contrat integer not null references contrat(id)
+);

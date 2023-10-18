@@ -1,6 +1,7 @@
 package com.example.restapi.services.contrat;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,10 @@ public class ContratService {
     @Autowired
     private CategorieRepo categorieRepo;
 
+    public Optional<Contrat> findById(int id) {
+        return this.contratRepo.findById(id);
+    }
+
     public List<TypeContrat> findAllTypes() {
         return this.typeContratRepo.findAll();
     }
@@ -39,6 +44,12 @@ public class ContratService {
 
     public void save(Contrat contrat) throws Exception {
         this.contratRepo.save(contrat);
+    }
+
+    public List<Contrat> findPendingContratsOfUser() throws Exception {
+        Utilisateur u = this.utilisateurService.getAuthenticatedUser()
+                .orElseThrow(() -> new Exception("Not connected"));
+        return this.contratRepo.findContratsByStatus(u.getId(), 0);
     }
 
     public List<Contrat> findAllContratOfUser() throws Exception {

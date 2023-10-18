@@ -3,7 +3,7 @@ package com.example.restapi.model.job;
 import java.time.LocalDate;
 
 import com.example.restapi.model.Service;
-import com.example.restapi.model.TypeContrat;
+import com.example.restapi.model.contrat.TypeContrat;
 import com.example.restapi.model.Ville;
 
 import jakarta.persistence.Column;
@@ -172,6 +172,10 @@ public class Job {
 
     public void setMission(String mission) {
         this.mission = mission;
+    }
+
+    public String getMission() {
+        return mission;
     }
 
 }

@@ -3,8 +3,8 @@ package com.example.restapi.model.job;
 import java.time.LocalDate;
 
 import com.example.restapi.model.Service;
-import com.example.restapi.model.TypeContrat;
 import com.example.restapi.model.Ville;
+import com.example.restapi.model.contrat.TypeContrat;
 import com.example.restapi.model.qcm.Questionnaire;
 
 import jakarta.persistence.Column;

@@ -84,7 +84,20 @@ UPDATE utilisateur set mot_de_passe=MD5('test') where id=1;
 
 UPDATE utilisateur set id_service=1 where id=1;
 insert 
-insert into type_contrat (type_contrat) values
-('CDI'),
-('CDD'),
-('CTT');
+insert into type_contrat (nom) VALUES 
+('Contrat d''essai'),
+('CDD - Contrat à durée déterminée'),
+('CDI - Contrat à durée indéterminée');
+
+insert into categorie (nom, valeur) VALUES
+('1A', 1),
+('1B', 1),
+('2A', 2),
+('2B', 2),
+('3A', 2),
+('3B', 2),
+('4A', 3),
+('4B', 3),
+('5A', 3),
+('5B', 3),
+('HC', 4);

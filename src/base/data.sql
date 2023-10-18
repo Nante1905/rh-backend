@@ -84,3 +84,11 @@ insert into type_contrat (type_contrat) values
 ('CDI'),
 ('CDD'),
 ('CTT');
+
+insert into categorie (nom,point)  VALUES
+('M1',6),
+('M2',5),
+('1A',4),
+('1B',3),
+('OS1',2),
+('OS2',1);

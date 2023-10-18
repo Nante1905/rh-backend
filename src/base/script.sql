@@ -227,3 +227,8 @@ alter table job add man_day integer;
 alter table job add mission VARCHAR(300);
 --ALTER TABLE job DROP COLUMN man_day;
 
+create table categorie (
+    id serial primary key,
+    nom varchar(50),
+    point integer 
+);

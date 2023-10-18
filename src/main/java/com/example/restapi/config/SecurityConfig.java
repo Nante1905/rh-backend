@@ -38,7 +38,8 @@ public class SecurityConfig {
                     req
                             .requestMatchers("/auth/**").permitAll()
                             .requestMatchers("/candidatures/docs/**").permitAll()
-                            .anyRequest().authenticated();
+                            // .anyRequest().authenticated();
+                            .anyRequest().permitAll();
                 })
                 .httpBasic(Customizer.withDefaults());
         http.addFilterBefore(jwtInterceptor(), UsernamePasswordAuthenticationFilter.class);

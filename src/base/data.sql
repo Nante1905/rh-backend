@@ -84,3 +84,7 @@ UPDATE utilisateur set mot_de_passe=MD5('test') where id=1;
 
 UPDATE utilisateur set id_service=1 where id=1;
 insert 
+insert into type_contrat (type_contrat) values
+('CDI'),
+('CDD'),
+('CTT');

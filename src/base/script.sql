@@ -230,3 +230,21 @@ alter table utilisateur add id_service int references service(id);
 -- 0->en attente, 1->test, 2->entretien, 3->embauche
 alter table candidature add status int;
 alter table utilisateur drop column mdp;
+--Bidy : type contrat 
+create table type_contrat (
+    id serial primary key,
+    type_contrat varchar(100) not null
+);
+
+-- Bidy : modif job
+alter table job add id_type_contrat integer;
+alter table job add nbr_personne integer;
+alter table job add min_age integer;
+alter table job add max_age integer;
+alter table job add id_ville integer;
+alter table job add foreign key(id_type_contrat) references type_contrat(id);
+alter table job add foreign key(id_ville) references ville(id);
+alter table job add man_day integer;
+alter table job add mission VARCHAR(300);
+--ALTER TABLE job DROP COLUMN man_day;
+

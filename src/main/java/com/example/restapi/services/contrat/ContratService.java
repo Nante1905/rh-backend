@@ -46,6 +46,14 @@ public class ContratService {
         this.contratRepo.save(contrat);
     }
 
+    public void accept(int id) {
+        this.contratRepo.updateStatus(id, 3);
+    }
+
+    public void decline(int id) {
+        this.contratRepo.updateStatus(id, -3);
+    }
+
     public List<Contrat> findPendingContratsOfUser() throws Exception {
         Utilisateur u = this.utilisateurService.getAuthenticatedUser()
                 .orElseThrow(() -> new Exception("Not connected"));

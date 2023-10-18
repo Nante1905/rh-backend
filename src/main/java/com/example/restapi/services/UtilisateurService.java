@@ -20,6 +20,10 @@ public class UtilisateurService {
     @Autowired
     private JWTManager jwt;
 
+    public void updateToEmploye(int id) {
+        this.uRepository.updateRole(id, 3);
+    }
+
     public Utilisateur save(Utilisateur u) {
         return this.uRepository.save(u);
     }

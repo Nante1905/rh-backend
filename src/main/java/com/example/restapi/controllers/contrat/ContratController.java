@@ -14,10 +14,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.restapi.model.Utilisateur;
 import com.example.restapi.model.contrat.Categorie;
 import com.example.restapi.model.contrat.Contrat;
 import com.example.restapi.model.contrat.ContratMin;
+import com.example.restapi.model.employe.Employe;
+import com.example.restapi.repositories.UtilisateurRepository;
+import com.example.restapi.services.EmployeService;
+import com.example.restapi.services.UtilisateurService;
 import com.example.restapi.services.contrat.ContratService;
+
+import jakarta.transaction.Transactional;
 
 @RestController
 @RequestMapping("contrats")
@@ -25,12 +32,49 @@ public class ContratController {
 
     @Autowired
     private ContratService contratService;
+    @Autowired
+    private EmployeService empService;
+    @Autowired
+    private UtilisateurService uService;
 
     @GetMapping("{id}")
     public ResponseEntity<?> findById(@PathVariable("id") int id) throws Exception {
         Optional<Contrat> contrat = this.contratService.findById(id);
         if (contrat.isPresent()) {
             return ResponseEntity.ok().body(contrat.get());
+        }
+        return ResponseEntity.status(404).body("Contrat not found");
+    }
+
+    @GetMapping("{id}/accept")
+    @Transactional(rollbackOn = { Exception.class })
+    public ResponseEntity<?> accept(@PathVariable("id") int id) throws Exception {
+        if (this.contratService.findById(id).isPresent()) {
+            this.contratService.accept(id);
+            Employe e = new Employe();
+            Utilisateur user = this.uService.getAuthenticatedUser().orElseThrow(() -> new Exception("Not connected"));
+            e.setUtilisateur(user);
+            Contrat c = new Contrat();
+            c.setId(id);
+            e.setContrat(c);
+            e = this.empService.save(e);
+            this.uService.updateToEmploye(e.getId());
+            HashMap<String, Object> res = new HashMap<String, Object>();
+            res.put("success", true);
+            res.put("msg", "Profil à jour");
+            return ResponseEntity.ok().body(res);
+        }
+        return ResponseEntity.status(404).body("Contrat not found");
+    }
+
+    @GetMapping("{id}/decline")
+    public ResponseEntity<?> decline(@PathVariable("id") int id) {
+        if (this.contratService.findById(id).isPresent()) {
+            this.contratService.decline(id);
+            HashMap<String, Object> res = new HashMap<String, Object>();
+            res.put("success", true);
+            res.put("msg", "Contrat refusé");
+            return ResponseEntity.ok().body(res);
         }
         return ResponseEntity.status(404).body("Contrat not found");
     }

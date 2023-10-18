@@ -114,6 +114,7 @@ public class JobService {
 
     public List<JobDetail> findJobNotApplied() throws Exception {
         Utilisateur u = this.utilisateurService.getAuthenticatedUser().get();
+        System.out.println("user " + u.getId() + "=================");
         return this.jobDetailRepository.findJobNotApplied(u.getId());
     }
 }

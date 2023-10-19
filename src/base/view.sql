@@ -24,3 +24,9 @@ CREATE  VIEW v_test_note_job
     c.id_job
    FROM v_test_note t_n
      JOIN candidature c ON t_n.id_candidat = c.id;
+
+-- CONGE
+create view v_cumul_conge as select id_utilisateur, case when (ceil( date_part( 'day', now() - max(date_debut)::date)/30)*2.5) > 90 then 90 else ceil( date_part( 'day', now() - max(date_debut)::date)/30)*2.5 end cumul from contrat where status=3 group by id_utilisateur;
+
+create view v_etat_conge as select e.id as id_employe, vc.cumul, case when jour is null then 0 else jour end consomme from v_cumul_conge vc join employe e on vc.id_utilisateur = e.id_utilisateur left join conge_consomme cc on cc.id_employe = id_employe;
+

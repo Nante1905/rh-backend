@@ -101,3 +101,5 @@ insert into categorie (nom, valeur) VALUES
 ('5A', 3),
 ('5B', 3),
 ('HC', 4);
+
+insert into type_conge values (default, 'Congé de maternité', true, 90, '2');

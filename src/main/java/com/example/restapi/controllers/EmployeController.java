@@ -26,6 +26,11 @@ public class EmployeController {
     @Autowired
     EmployeService empService;
 
+    // @GetMapping("/conges/{id}")
+    // public ResponseEntity<Integer> findResteConge(@PathVariable("id") int id) {
+    // return ResponseEntity.ok().body(this.empService.getResteConge(id));
+    // }
+
     @GetMapping
     public ResponseEntity<List<EmployeDTO>> findAll() {
         List<EmployeDTO> res = new ArrayList<EmployeDTO>();

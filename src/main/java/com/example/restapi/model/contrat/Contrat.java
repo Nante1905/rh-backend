@@ -58,8 +58,8 @@ public class Contrat {
     @Transient
     String anciennete;
 
-    public String getAnciennete() {
+    public Period getAnciennete() {
         Period period = this.getDebut().until(LocalDate.now());
-        return String.format("%dj %dm %da", period.getDays(), period.getMonths(), period.getYears());
+        return period;
     }
 }

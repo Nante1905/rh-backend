@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.restapi.exceptions.CongeException;
 import com.example.restapi.model.employe.Employe;
 import com.example.restapi.repositories.EmployeRepository;
 

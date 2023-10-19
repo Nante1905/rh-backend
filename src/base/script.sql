@@ -297,3 +297,30 @@ create table employe (
     id_utilisateur integer not null references utilisateur(id),
     id_contrat integer not null references contrat(id)
 );
+
+-- CONGE
+create table conge_consomme (
+    id serial primary key,
+    id_employe integer not null references utilisateur(id),
+    jour double precision not null
+);
+
+create table type_conge (
+    id serial primary key,
+    nom varchar(100),
+    deductible boolean,
+    jour double precision,
+    genre varchar(10)
+);
+
+create table demande_conge (
+    id serial primary key,
+    id_employe integer not null references employe(id),
+    debut date,
+    debut_demi_journee boolean default false,
+    fin date,
+    fin_demi_journee boolean default false,
+    motif varchar(255),
+    id_type integer not null references type_conge(id),
+    status integer not null default 0
+);

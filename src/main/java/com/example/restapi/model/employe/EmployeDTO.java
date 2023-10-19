@@ -1,6 +1,7 @@
 package com.example.restapi.model.employe;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,7 +33,8 @@ public class EmployeDTO {
         setContrat(source.getContrat().getType().getNom());
         setPoste(source.getContrat().getJob().getTitle());
         setCategorie(source.getContrat().getCategorie().getNom());
-        setAnciennete(source.getContrat().getAnciennete());
+        Period period = source.getContrat().getAnciennete();
+        setAnciennete(String.format("%dj %dm %da", period.getDays(), period.getMonths(), period.getYears()));
         setDebutContrat(source.getContrat().getDebut());
     }
 }

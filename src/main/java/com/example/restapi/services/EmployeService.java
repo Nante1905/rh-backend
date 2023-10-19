@@ -15,6 +15,10 @@ public class EmployeService {
     @Autowired
     EmployeRepository empRepository;
 
+    public List<Employe> findByMission(String mission) {
+        return this.empRepository.findByContrat_JobMissionContainingIgnoreCase(mission);
+    }
+
     public String generateMatricule() {
         long count = this.empRepository.count();
         return "E" + String.format("%04d", count + 1);

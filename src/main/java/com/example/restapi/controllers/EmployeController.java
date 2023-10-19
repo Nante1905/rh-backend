@@ -1,5 +1,6 @@
 package com.example.restapi.controllers;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.restapi.model.employe.Employe;
+import com.example.restapi.model.employe.EmployeDTO;
 import com.example.restapi.services.EmployeService;
 
 @RestController
@@ -25,14 +27,27 @@ public class EmployeController {
     EmployeService empService;
 
     @GetMapping
-    public ResponseEntity<List<Employe>> findAll() {
-        return ResponseEntity.ok().body(this.empService.findAll());
+    public ResponseEntity<List<EmployeDTO>> findAll() {
+        List<EmployeDTO> res = new ArrayList<EmployeDTO>();
+        this.empService.findAll().stream().forEach((e) -> {
+            res.add(new EmployeDTO(e));
+        });
+        return ResponseEntity.ok().body(res);
+    }
+
+    @PostMapping("/missions")
+    public ResponseEntity<List<EmployeDTO>> findByMission(@RequestBody HashMap<String, String> patterns) {
+        List<EmployeDTO> res = new ArrayList<EmployeDTO>();
+        this.empService.findByMission(patterns.get("pattern")).stream().forEach((e) -> {
+            res.add(new EmployeDTO(e));
+        });
+        return ResponseEntity.ok().body(res);
     }
 
     @GetMapping("{id}")
     public ResponseEntity<?> findAll(@PathVariable("id") int id) {
         Optional<Employe> emp = this.empService.findById(id);
-        if(emp.isPresent()) {
+        if (emp.isPresent()) {
             return ResponseEntity.ok().body(emp.get());
         }
         return ResponseEntity.status(404).body("Not found");

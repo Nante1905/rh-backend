@@ -1,6 +1,7 @@
 package com.example.restapi.model.contrat;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
 import com.example.restapi.model.Utilisateur;
@@ -16,6 +17,7 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Transient;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -53,4 +55,11 @@ public class Contrat {
     LocalDate creation;
     // 0 -> crée, 3 -> accepter, -3 -> refuser
     int status;
+    @Transient
+    String anciennete;
+
+    public String getAnciennete() {
+        Period period = this.getDebut().until(LocalDate.now());
+        return String.format("%dj %dm %da", period.getDays(), period.getMonths(), period.getYears());
+    }
 }

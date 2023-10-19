@@ -20,6 +20,7 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Transient;
 
 /**
  * Utilisateur
@@ -57,6 +58,9 @@ public class Utilisateur {
 
     @Column(name = "mot_de_passe")
     String password;
+
+    @Transient
+    int age;
 
     public Utilisateur() {
     }
@@ -186,6 +190,14 @@ public class Utilisateur {
 
     public void setService(Service service) {
         this.service = service;
+    }
+
+    public int getAge() {
+        return LocalDate.now().getYear() - this.getNaissance().getYear() ;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
 }

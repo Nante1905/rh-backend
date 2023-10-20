@@ -30,3 +30,6 @@ create view v_cumul_conge as select id_utilisateur, case when (ceil( date_part( 
 
 create view v_etat_conge as select e.id as id_employe, vc.cumul, case when jour is null then 0 else jour end consomme from v_cumul_conge vc join employe e on vc.id_utilisateur = e.id_utilisateur left join conge_consomme cc on cc.id_employe = id_employe;
 
+-- Presence ou absence
+create view v_presence_tmp as select id_employe, case when count(*) = 0 then true else false end presence from demande_conge d where (now() >= d.debut and now() <= d.fin) and status = 5 group by id_employe;
+create view v_presence as select e.id as id_employe, case when presence is null then true else presence end presence from employe e left join v_presence_tmp p on e.id = p.id_employe;

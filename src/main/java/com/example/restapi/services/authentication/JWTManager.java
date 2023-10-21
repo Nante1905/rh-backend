@@ -29,6 +29,7 @@ public class JWTManager {
                 .setIssuedAt(currentDate)
                 .setExpiration(new Date(currentDate.getTime() + dayToMs(1)))
                 .claim("roles", utilisateur.generateStringRoles())
+                .claim("name", utilisateur.getNom() + " " + utilisateur.getPrenom())
                 .signWith(key)
                 .compact();
         return token;

@@ -3,7 +3,6 @@ package com.example.restapi.model.conge;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-import com.example.restapi.model.contrat.TypeContrat;
 import com.example.restapi.model.employe.Employe;
 
 import jakarta.persistence.Entity;
@@ -48,6 +47,15 @@ public class DemandeConge {
             days -= 0.5;
         }
         return days;
+    }
+
+    public LocalDate getFin() {
+        Double jour = this.getType().getJour();
+        if (jour == null || this.getType().isDeductible()) {
+            return fin;
+        }
+
+        return this.getDebut().plusDays(jour.longValue());
     }
 
 }

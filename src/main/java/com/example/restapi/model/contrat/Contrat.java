@@ -52,6 +52,7 @@ public class Contrat {
     @JoinColumn(name = "id_categorie")
     Categorie categorie;
 
+    @Column(insertable = false)
     LocalDate creation;
     // 0 -> crée, 3 -> accepter, -3 -> refuser
     int status;
@@ -60,6 +61,9 @@ public class Contrat {
 
     public Period getAnciennete() {
         Period period = this.getDebut().until(LocalDate.now());
+        if (this.getDebut().isAfter(LocalDate.now())) {
+            period = Period.of(0, 0, 0);
+        }
         return period;
     }
 }

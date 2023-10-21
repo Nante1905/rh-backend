@@ -11,7 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.restapi.model.conge.DemandeConge;
+<<<<<<< HEAD
 import com.example.restapi.model.conge.TypeConge;
+=======
+import com.example.restapi.model.conge.DemandeCongeDAO;
+import com.example.restapi.services.EmployeService;
+>>>>>>> dev
 import com.example.restapi.services.conge.CongeService;
 
 @RestController
@@ -20,15 +25,34 @@ public class CongeController {
 
     @Autowired
     CongeService congeService;
+    @Autowired
+    EmployeService empService;
 
     @GetMapping
     public ResponseEntity<List<DemandeConge>> findAll() {
         return ResponseEntity.ok().body(congeService.findAll());
     }
 
+<<<<<<< HEAD
     @GetMapping("/types")
     public ResponseEntity<List<TypeConge>> findAllTypeC() {
         return ResponseEntity.ok().body(congeService.findAllTypeConge());
+=======
+    // Tokony admin ihany no mahita
+    @GetMapping("/valides")
+    public ResponseEntity<List<DemandeCongeDAO>> findAllValides() {
+        return ResponseEntity.ok().body(congeService.findValideConge());
+    }
+
+    @GetMapping("/valides/services")
+    public ResponseEntity<?> findValidesUnderAuth() {
+        try {
+            return ResponseEntity.ok().body(congeService.findAllValideCongeUnder());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+>>>>>>> dev
     }
 
     @GetMapping("accept/{id}")
@@ -60,4 +84,31 @@ public class CongeController {
             return ResponseEntity.status(500).body(res);
         }
     }
+
+    @GetMapping("/demandes")
+    public ResponseEntity<?> authEmp() {
+        try {
+            HashMap<String, Object> res = new HashMap<String, Object>();
+            res.put("auth", this.empService.getAuthenticatedEmploye().isChef());
+            res.put("data", this.congeService.findAllDemandeUnderAuthUser());
+            return ResponseEntity.ok().body(res);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(403).body(null);
+        }
+
+    }
+
+    @GetMapping("/mine")
+    public ResponseEntity<?> findCongeOfAuthenticatedEmp() {
+        HashMap<String, Object> res;
+        try {
+            res = this.congeService.findConge();
+            return ResponseEntity.ok().body(res);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+    }
+
 }

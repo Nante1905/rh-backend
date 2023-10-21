@@ -5,10 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.restapi.model.qcm.test.ReponseCandidat;
 import com.example.restapi.model.qcm.test.ResultatCandidat;
 import com.example.restapi.model.qcm.test.Test;
-import com.example.restapi.model.qcm.test.TestReponse;
 import com.example.restapi.repositories.qcm.ResultatCandidatRepository;
 import com.example.restapi.repositories.qcm.TestRepository;
 

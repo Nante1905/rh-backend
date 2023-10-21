@@ -1,5 +1,7 @@
 package com.example.restapi.services.conge;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,22 +13,16 @@ import org.springframework.stereotype.Service;
 import com.example.restapi.exceptions.CongeException;
 import com.example.restapi.model.conge.CongeConsomme;
 import com.example.restapi.model.conge.DemandeConge;
-<<<<<<< HEAD
-import com.example.restapi.model.conge.TypeConge;
-=======
 import com.example.restapi.model.conge.DemandeCongeDAO;
 import com.example.restapi.model.conge.EtatConge;
->>>>>>> dev
+import com.example.restapi.model.conge.TypeConge;
 import com.example.restapi.model.employe.Employe;
 import com.example.restapi.repositories.EmployeRepository;
 import com.example.restapi.repositories.conge.CongeConsommeRepository;
 import com.example.restapi.repositories.conge.CongeRepository;
-<<<<<<< HEAD
-import com.example.restapi.repositories.conge.TypeCongeRepository;
-=======
 import com.example.restapi.repositories.conge.EtatCongeRepository;
+import com.example.restapi.repositories.conge.TypeCongeRepository;
 import com.example.restapi.services.EmployeService;
->>>>>>> dev
 
 import jakarta.transaction.Transactional;
 
@@ -39,12 +35,18 @@ public class CongeService {
     @Autowired
     CongeRepository congeRepo;
     @Autowired
+    TypeCongeRepository typeCongeRepo;
+    @Autowired
     private EmployeService employeService;
     @Autowired
     EtatCongeRepository etatCongeRepo;
 
     public List<DemandeConge> findAll() {
         return this.congeRepo.findAll();
+    }
+
+    public List<TypeConge> findAllTypeConges() {
+        return this.typeCongeRepo.findAll();
     }
 
     // tokony zay RH ihany afaka miantso an'ito
@@ -106,20 +108,25 @@ public class CongeService {
 
     public boolean checkDemandeConge(int id) throws Exception {
         // Alaina aloha ilay DemandeConge
+        DemandeConge demande = this.congeRepo.findById(id)
+                .orElseThrow(() -> new Exception("Demande de congé introuvable"));
+
         // Alaina ny emp an'ilay DemandeConge, ovaina getter an'i Employe zany ito
-        // if(DemandeConge.TypeConge.deductible == false) => return true else
-        Employe emp = new Employe(1);
-        // Demandeconge.fin-DemandeConge.debut
-        int nbr = 2;
+        Employe emp = new Employe(demande.getEmp().getId());
+
+        int nbr = (int) ChronoUnit.DAYS.between(demande.getDebut(), demande.getFin());
         int rest = this.getResteConge(emp.getId());
+
         // si demandeconget.type.genre ne contains pas demandeConge.emp.genre.id =>
         // throw Exception
         if (rest < nbr) {
             throw new CongeException("Nombre de congé restant insuffisant");
         }
+
         if (emp.getContrat().getAnciennete().getYears() < 1) {
             throw new CongeException("Ancienneté inférieure à 1 an.");
         }
+
         return true;
     }
 
@@ -151,4 +158,9 @@ public class CongeService {
         res = res.stream().filter((d) -> d.getEmp().getService().getId() == emp.getService().getId()).toList();
         return res;
     }
+
+    public void save(DemandeConge conge) throws Exception {
+        this.congeRepo.save(conge);
+    }
+
 }

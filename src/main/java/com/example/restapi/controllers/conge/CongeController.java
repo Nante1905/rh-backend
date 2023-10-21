@@ -7,16 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.restapi.model.conge.DemandeConge;
-<<<<<<< HEAD
-import com.example.restapi.model.conge.TypeConge;
-=======
 import com.example.restapi.model.conge.DemandeCongeDAO;
+import com.example.restapi.model.conge.TypeConge;
 import com.example.restapi.services.EmployeService;
->>>>>>> dev
 import com.example.restapi.services.conge.CongeService;
 
 @RestController
@@ -33,11 +32,11 @@ public class CongeController {
         return ResponseEntity.ok().body(congeService.findAll());
     }
 
-<<<<<<< HEAD
     @GetMapping("/types")
-    public ResponseEntity<List<TypeConge>> findAllTypeC() {
-        return ResponseEntity.ok().body(congeService.findAllTypeConge());
-=======
+    public ResponseEntity<List<TypeConge>> findAllTypes() {
+        return ResponseEntity.ok().body(congeService.findAllTypeConges());
+    }
+
     // Tokony admin ihany no mahita
     @GetMapping("/valides")
     public ResponseEntity<List<DemandeCongeDAO>> findAllValides() {
@@ -52,7 +51,6 @@ public class CongeController {
             e.printStackTrace();
             return ResponseEntity.status(500).body(e.getMessage());
         }
->>>>>>> dev
     }
 
     @GetMapping("accept/{id}")
@@ -109,6 +107,18 @@ public class CongeController {
             e.printStackTrace();
             return ResponseEntity.status(500).body(e.getMessage());
         }
+    }
+
+    @PostMapping
+    public ResponseEntity<?> save(@RequestBody DemandeConge conge) {
+        try {
+            this.congeService.save(conge);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        HashMap<String, Boolean> res = new HashMap<String, Boolean>();
+        res.put("success", true);
+        return ResponseEntity.ok().body(res);
     }
 
 }

@@ -64,4 +64,15 @@ public class EmployeController {
         res.put("success", true);
         return ResponseEntity.ok().body(res);
     }
+
+    @GetMapping("/getAuthenticatedEmploye")
+    public ResponseEntity<Employe> getAuthenticatedEmploye() {
+        try {
+            Employe employe = empService.getAuthenticatedEmploye();
+            return ResponseEntity.ok(employe);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body(null);
+        }
+    }
 }

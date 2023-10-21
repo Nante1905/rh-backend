@@ -1,6 +1,5 @@
 package com.example.restapi.controllers.conge;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -12,8 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.restapi.model.conge.DemandeConge;
-import com.example.restapi.model.conge.DemandeCongeDAO;
-import com.example.restapi.model.conge.EtatConge;
+import com.example.restapi.services.EmployeService;
 import com.example.restapi.services.conge.CongeService;
 
 @RestController
@@ -22,6 +20,8 @@ public class CongeController {
 
     @Autowired
     CongeService congeService;
+    @Autowired
+    EmployeService empService;
 
     @GetMapping
     public ResponseEntity<List<DemandeConge>> findAll() {
@@ -57,6 +57,17 @@ public class CongeController {
             return ResponseEntity.status(500).body(res);
         }
     }
+
+    @GetMapping("/demandes")
+    public ResponseEntity<?> authEmp() {
+        try {
+            HashMap<String, Object> res = new HashMap<String, Object>();
+            res.put("auth", this.empService.getAuthenticatedEmploye().isChef());
+            res.put("data", this.congeService.findAllDemandeUnderAuthUser());
+            return ResponseEntity.ok().body(res);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(403).body(null);
 
     @GetMapping("/mine")
     public ResponseEntity<?> findCongeOfAuthenticatedEmp() {

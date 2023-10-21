@@ -1,5 +1,6 @@
 package com.example.restapi.model.employe;
 
+import com.example.restapi.model.Service;
 import com.example.restapi.model.Utilisateur;
 import com.example.restapi.model.contrat.Contrat;
 
@@ -10,7 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
-import jakarta.persistence.PrimaryKeyJoinColumn;
+import jakarta.persistence.Transient;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -31,10 +32,16 @@ public class Employe {
     @OneToOne
     @JoinColumn(name = "id_contrat")
     Contrat contrat;
+    @Transient
+    boolean isChef;
     @OneToOne(mappedBy = "emp", cascade = CascadeType.ALL)
     Presence presence;
 
     public Employe(int id) {
         setId(id);
+    }
+
+    public Service getService() {
+        return this.getContrat().getJob().getService();
     }
 }

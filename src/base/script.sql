@@ -319,7 +319,7 @@ create table demande_conge (
     debut date,
     debut_demi_journee boolean default false,
     fin date,
-    fin_demi_journee boolean default false,
+    fin_demi_journee boolean default false, 
     motif varchar(255),
     id_type integer not null references type_conge(id),
     status integer not null default 0

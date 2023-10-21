@@ -8,10 +8,12 @@ import org.springframework.stereotype.Service;
 import com.example.restapi.exceptions.CongeException;
 import com.example.restapi.model.conge.CongeConsomme;
 import com.example.restapi.model.conge.DemandeConge;
+import com.example.restapi.model.conge.TypeConge;
 import com.example.restapi.model.employe.Employe;
 import com.example.restapi.repositories.EmployeRepository;
 import com.example.restapi.repositories.conge.CongeConsommeRepository;
 import com.example.restapi.repositories.conge.CongeRepository;
+import com.example.restapi.repositories.conge.TypeCongeRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -23,9 +25,15 @@ public class CongeService {
     CongeConsommeRepository consommeRepo;
     @Autowired
     CongeRepository congeRepo;
+    @Autowired
+    TypeCongeRepository typecongeRepo;
 
     public List<DemandeConge> findAll() {
         return this.congeRepo.findAll();
+    }
+
+    public List<TypeConge> findAllTypeConge() {
+        return this.typecongeRepo.findAll();
     }
 
     @Transactional(rollbackOn = { Exception.class })

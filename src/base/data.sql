@@ -103,3 +103,10 @@ insert into categorie (nom, valeur) VALUES
 ('HC', 4);
 
 insert into type_conge values (default, 'Congé de maternité', true, 90, '2');
+-- *: afaka daholo, 1:lehilahy, 2:
+INSERT INTO type_conge (nom, deductible, jour, genre) VALUES
+    ('Congé payé', true, 30, '*'),
+    ('Congé de maladie', false, 180, '*'),
+    ('Congé de maternité', false, 90, '2'),
+    ('Permission exceptionnelle', false,10, '*'),
+    ('Congé de paternité', false, 3, '1');

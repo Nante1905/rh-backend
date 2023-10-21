@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.restapi.model.conge.DemandeConge;
+import com.example.restapi.model.conge.TypeConge;
 import com.example.restapi.services.conge.CongeService;
 
 @RestController
@@ -23,6 +24,11 @@ public class CongeController {
     @GetMapping
     public ResponseEntity<List<DemandeConge>> findAll() {
         return ResponseEntity.ok().body(congeService.findAll());
+    }
+
+    @GetMapping("/types")
+    public ResponseEntity<List<TypeConge>> findAllTypeC() {
+        return ResponseEntity.ok().body(congeService.findAllTypeConge());
     }
 
     @GetMapping("accept/{id}")

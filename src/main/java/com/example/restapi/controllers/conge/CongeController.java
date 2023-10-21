@@ -1,5 +1,6 @@
 package com.example.restapi.controllers.conge;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.restapi.model.conge.DemandeConge;
+import com.example.restapi.model.conge.DemandeCongeDAO;
+import com.example.restapi.model.conge.EtatConge;
 import com.example.restapi.services.conge.CongeService;
 
 @RestController
@@ -52,6 +55,18 @@ public class CongeController {
             e.printStackTrace();
             res.put("msg", e.getMessage());
             return ResponseEntity.status(500).body(res);
+        }
+    }
+
+    @GetMapping("/mine")
+    public ResponseEntity<?> findCongeOfAuthenticatedEmp() {
+        HashMap<String, Object> res;
+        try {
+            res = this.congeService.findConge();
+            return ResponseEntity.ok().body(res);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body(e.getMessage());
         }
     }
 }

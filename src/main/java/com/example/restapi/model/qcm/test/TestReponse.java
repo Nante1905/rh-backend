@@ -1,6 +1,5 @@
 package com.example.restapi.model.qcm.test;
 
-import com.example.restapi.model.qcm.Question;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;

@@ -68,6 +68,9 @@ public class CongeController {
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(403).body(null);
+        }
+
+    }
 
     @GetMapping("/mine")
     public ResponseEntity<?> findCongeOfAuthenticatedEmp() {

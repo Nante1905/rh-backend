@@ -19,7 +19,6 @@ import com.example.restapi.model.contrat.Categorie;
 import com.example.restapi.model.contrat.Contrat;
 import com.example.restapi.model.contrat.ContratMin;
 import com.example.restapi.model.employe.Employe;
-import com.example.restapi.repositories.UtilisateurRepository;
 import com.example.restapi.services.EmployeService;
 import com.example.restapi.services.UtilisateurService;
 import com.example.restapi.services.contrat.ContratService;

@@ -18,6 +18,7 @@ import com.example.restapi.repositories.EmployeRepository;
 import com.example.restapi.repositories.conge.CongeConsommeRepository;
 import com.example.restapi.repositories.conge.CongeRepository;
 import com.example.restapi.repositories.conge.EtatCongeRepository;
+import com.example.restapi.services.EmployeService;
 
 import jakarta.transaction.Transactional;
 
@@ -30,6 +31,7 @@ public class CongeService {
     @Autowired
     CongeRepository congeRepo;
     @Autowired
+    private EmployeService employeService;
     EtatCongeRepository etatCongeRepo;
 
     public List<DemandeConge> findAll() {
@@ -73,12 +75,17 @@ public class CongeService {
     public void acceptDemande(int id) throws Exception {
         DemandeConge demande = this.congeRepo.findById(id)
                 .orElseThrow(() -> new Exception("Demande de congé introuvable"));
-        this.congeRepo.updateStatus(id, 5);
-        if (demande.getType().isDeductible()) {
-            double duree = demande.getDuree();
-            System.out.println(" deductible  avec durée " + duree + "=====================");
-            CongeConsomme c = new CongeConsomme(demande.getEmp().getId(), duree);
-            this.consommeRepo.save(c);
+        Employe empConn = this.employeService.getAuthenticatedEmploye();
+        if (empConn.getId() == this.empRepository.getIdChef(empConn.getService().getId())) {
+            this.congeRepo.updateStatus(id, 5);
+            if (demande.getType().isDeductible()) {
+                double duree = demande.getDuree();
+                System.out.println(" deductible  avec durée " + duree + "=====================");
+                CongeConsomme c = new CongeConsomme(demande.getEmp().getId(), duree);
+                this.consommeRepo.save(c);
+            }
+        } else {
+            throw new Exception("Permission refuse, Vous n'etes pas habilite a faire cette action");
         }
     }
 
@@ -110,5 +117,14 @@ public class CongeService {
 
     public int getResteConge(int id) {
         return this.empRepository.getRestConge(id);
+    }
+
+    public void findAllDemandeUnder(int categorieValeur) {
+        this.congeRepo.findAllDemandeCongeUnder(categorieValeur);
+    }
+
+    public List<DemandeConge> findAllDemandeUnderAuthUser() throws Exception {
+        Employe emp = this.employeService.getAuthenticatedEmploye();
+        return this.congeRepo.findAllDemandeCongeUnder(emp.getContrat().getCategorie().getValeur());
     }
 }

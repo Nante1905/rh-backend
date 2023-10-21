@@ -30,6 +30,7 @@ create view v_cumul_conge as select id_utilisateur, case when (ceil( date_part( 
 
 create view v_etat_conge as select e.id as id_employe, vc.cumul, case when jour is null then 0 else jour end consomme from v_cumul_conge vc join employe e on vc.id_utilisateur = e.id_utilisateur left join conge_consomme cc on cc.id_employe = id_employe;
 
+<<<<<<< HEAD
 -- nante
 create view v_demande_conge_categorie as select dc.*, ctg.* from demande_conge dc join employe e on dc.id_employe=e.id join contrat ct on e.id_contrat=ct.id join categorie ctg on ctg.id=ct.id_categorie;
 
@@ -38,3 +39,8 @@ create view v_emp_categorie_service as select e.*,  cat.valeur as categorie, j.i
 
 create view v_max_categorie_service as  select service, max(categorie) as categorie from v_emp_categorie_service group by service;
 create view v_chef_service as select id, matricule, id_utilisateur, cat.categorie, cat.service from v_emp_categorie_service cat join v_max_categorie_service max on cat.service = max.service and cat.categorie = max.categorie;
+=======
+-- Presence ou absence
+create view v_presence_tmp as select id_employe, case when count(*) = 0 then true else false end presence from demande_conge d where (now() >= d.debut and now() <= d.fin) and status = 5 group by id_employe;
+create view v_presence as select e.id as id_employe, case when presence is null then true else presence end presence from employe e left join v_presence_tmp p on e.id = p.id_employe;
+>>>>>>> dev

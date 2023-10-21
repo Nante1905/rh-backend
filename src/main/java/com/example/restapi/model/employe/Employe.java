@@ -4,6 +4,7 @@ import com.example.restapi.model.Service;
 import com.example.restapi.model.Utilisateur;
 import com.example.restapi.model.contrat.Contrat;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -33,6 +34,8 @@ public class Employe {
     Contrat contrat;
     @Transient
     boolean isChef;
+    @OneToOne(mappedBy = "emp", cascade = CascadeType.ALL)
+    Presence presence;
 
     public Employe(int id) {
         setId(id);

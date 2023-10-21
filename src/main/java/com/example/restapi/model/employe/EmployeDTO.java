@@ -23,6 +23,7 @@ public class EmployeDTO {
     LocalDate debutContrat;
     String categorie;
     String service;
+    boolean presence;
 
     public EmployeDTO(Employe source) {
         setId(source.getId());
@@ -38,5 +39,6 @@ public class EmployeDTO {
         setAnciennete(String.format("%dj %dm %da", period.getDays(), period.getMonths(), period.getYears()));
         setService(source.getService().getNom_service());
         setDebutContrat(source.getContrat().getDebut());
+        setPresence(source.getPresence().isPresence());
     }
 }

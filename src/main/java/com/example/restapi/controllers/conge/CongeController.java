@@ -68,6 +68,16 @@ public class CongeController {
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(403).body(null);
+
+    @GetMapping("/mine")
+    public ResponseEntity<?> findCongeOfAuthenticatedEmp() {
+        HashMap<String, Object> res;
+        try {
+            res = this.congeService.findConge();
+            return ResponseEntity.ok().body(res);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body(e.getMessage());
         }
     }
 }

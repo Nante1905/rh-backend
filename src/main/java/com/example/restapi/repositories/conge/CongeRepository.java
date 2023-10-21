@@ -15,4 +15,6 @@ public interface CongeRepository extends JpaRepository<DemandeConge, Integer> {
     public void updateStatus(int id, int status);
 
     public List<DemandeConge> findByEmp(Employe emp);
+
+    public List<DemandeConge> findByStatus(int status);
 }

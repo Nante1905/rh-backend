@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Role;
 import org.springframework.stereotype.Service;
 
 import com.example.restapi.exceptions.CongeException;
@@ -33,6 +34,15 @@ public class CongeService {
 
     public List<DemandeConge> findAll() {
         return this.congeRepo.findAll();
+    }
+
+    // tokony zay RH ihany afaka miantso an'ito
+    public List<DemandeCongeDAO> findValideConge() {
+        List<DemandeCongeDAO> demandes = new ArrayList<DemandeCongeDAO>();
+        this.congeRepo.findByStatus(5).stream().forEach((d) -> {
+            demandes.add(new DemandeCongeDAO(d));
+        });
+        return demandes;
     }
 
     public HashMap<String, Object> findConge() throws Exception {
@@ -64,10 +74,12 @@ public class CongeService {
         DemandeConge demande = this.congeRepo.findById(id)
                 .orElseThrow(() -> new Exception("Demande de congé introuvable"));
         this.congeRepo.updateStatus(id, 5);
-        double duree = demande.getDuree();
-        System.out.println("dureee " + duree + "=====================");
-        CongeConsomme c = new CongeConsomme(demande.getEmp().getId(), duree);
-        this.consommeRepo.save(c);
+        if (demande.getType().isDeductible()) {
+            double duree = demande.getDuree();
+            System.out.println(" deductible  avec durée " + duree + "=====================");
+            CongeConsomme c = new CongeConsomme(demande.getEmp().getId(), duree);
+            this.consommeRepo.save(c);
+        }
     }
 
     @Transactional(rollbackOn = { Exception.class })

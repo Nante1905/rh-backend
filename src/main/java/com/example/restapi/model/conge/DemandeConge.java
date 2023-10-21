@@ -50,4 +50,13 @@ public class DemandeConge {
         return days;
     }
 
+    public LocalDate getFin() {
+        Double jour = this.getType().getJour();
+        if (jour == null || this.getType().isDeductible()) {
+            return fin;
+        }
+
+        return this.getDebut().plusDays(jour.longValue());
+    }
+
 }

@@ -28,6 +28,12 @@ public class CongeController {
         return ResponseEntity.ok().body(congeService.findAll());
     }
 
+    // Tokony admin ihany no mahita
+    @GetMapping("/valides")
+    public ResponseEntity<List<DemandeCongeDAO>> findAllValides() {
+        return ResponseEntity.ok().body(congeService.findValideConge());
+    }
+
     @GetMapping("accept/{id}")
     public ResponseEntity<Object> accept(@PathVariable("id") int id) {
         HashMap<String, String> res = new HashMap<String, String>();
@@ -69,4 +75,5 @@ public class CongeController {
             return ResponseEntity.status(500).body(e.getMessage());
         }
     }
+
 }

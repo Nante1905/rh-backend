@@ -20,6 +20,8 @@ public class DemandeCongeDAO {
     int id;
     int idEmp;
     String motif;
+    String employe;
+    String service;
     TypeConge type;
     int codeStatus;
     String status;
@@ -36,6 +38,8 @@ public class DemandeCongeDAO {
         setCodeStatus(source.getStatus());
         setDebut(source.getDebut());
         setFin(source.getFin());
+        setEmploye(source.getEmp().getUtilisateur().getNom() + " " + source.getEmp().getUtilisateur().getPrenom());
+        setService(source.getEmp().getContrat().getJob().getService().getNom_service());
     }
 
     public String getStatus() {

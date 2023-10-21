@@ -32,6 +32,7 @@ public class CongeService {
     CongeRepository congeRepo;
     @Autowired
     private EmployeService employeService;
+    @Autowired
     EtatCongeRepository etatCongeRepo;
 
     public List<DemandeConge> findAll() {
@@ -53,8 +54,7 @@ public class CongeService {
         this.findByAuthenticatedEmp().stream().forEach((d) -> {
             demandes.add(new DemandeCongeDAO(d));
         });
-        // soloina an'ilay get Authenticated employe an'i Nante
-        Employe e = new Employe(1);
+        Employe e = this.employeService.getAuthenticatedEmploye();
         EtatConge etat = findEtatConge(e.getId());
         res.put("etat", etat);
         res.put("conge", demandes);
@@ -65,9 +65,9 @@ public class CongeService {
         return this.etatCongeRepo.findById(idEmp).orElseThrow(() -> new Exception("Etat de congé introuvable"));
     }
 
-    public List<DemandeConge> findByAuthenticatedEmp() {
+    public List<DemandeConge> findByAuthenticatedEmp() throws Exception {
         // Ovaina an'ilay get AuthenticatedEmp any am Nante
-        Employe emp = new Employe(1);
+        Employe emp = this.employeService.getAuthenticatedEmploye();
         return this.congeRepo.findByEmp(emp);
     }
 
@@ -123,8 +123,24 @@ public class CongeService {
         this.congeRepo.findAllDemandeCongeUnder(categorieValeur);
     }
 
+    public List<DemandeCongeDAO> findAllValideCongeUnder() throws Exception {
+        Employe emp = this.employeService.getAuthenticatedEmploye();
+        List<DemandeCongeDAO> res = new ArrayList<DemandeCongeDAO>();
+        List<DemandeConge> demandes = this.congeRepo
+                .findAllValideCongeUnder(emp.getContrat().getCategorie().getValeur());
+        demandes = demandes.stream().filter((d) -> d.getEmp().getService().getId() == emp.getService().getId())
+                .toList();
+        demandes.stream().forEach((d) -> {
+            res.add(new DemandeCongeDAO(d));
+        });
+
+        return res;
+    }
+
     public List<DemandeConge> findAllDemandeUnderAuthUser() throws Exception {
         Employe emp = this.employeService.getAuthenticatedEmploye();
-        return this.congeRepo.findAllDemandeCongeUnder(emp.getContrat().getCategorie().getValeur());
+        List<DemandeConge> res = this.congeRepo.findAllDemandeCongeUnder(emp.getContrat().getCategorie().getValeur());
+        res = res.stream().filter((d) -> d.getEmp().getService().getId() == emp.getService().getId()).toList();
+        return res;
     }
 }

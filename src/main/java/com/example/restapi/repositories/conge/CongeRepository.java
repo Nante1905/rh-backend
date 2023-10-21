@@ -18,6 +18,9 @@ public interface CongeRepository extends JpaRepository<DemandeConge, Integer> {
     @Query(value = "select * from v_demande_conge_categorie where valeur < ?1 and status=0", nativeQuery = true)
     public List<DemandeConge> findAllDemandeCongeUnder(int categorieValeur);
 
+    @Query(value = "select * from v_demande_conge_categorie where valeur < ?1 and status=5", nativeQuery = true)
+    public List<DemandeConge> findAllValideCongeUnder(int categorieValeur);
+
     public List<DemandeConge> findByEmp(Employe emp);
 
     public List<DemandeConge> findByStatus(int status);

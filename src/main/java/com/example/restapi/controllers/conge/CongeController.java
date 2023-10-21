@@ -35,6 +35,16 @@ public class CongeController {
         return ResponseEntity.ok().body(congeService.findValideConge());
     }
 
+    @GetMapping("/valides/services")
+    public ResponseEntity<?> findValidesUnderAuth() {
+        try {
+            return ResponseEntity.ok().body(congeService.findAllValideCongeUnder());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+    }
+
     @GetMapping("accept/{id}")
     public ResponseEntity<Object> accept(@PathVariable("id") int id) {
         HashMap<String, String> res = new HashMap<String, String>();

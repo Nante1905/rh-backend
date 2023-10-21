@@ -30,3 +30,11 @@ create view v_cumul_conge as select id_utilisateur, case when (ceil( date_part( 
 
 create view v_etat_conge as select e.id as id_employe, vc.cumul, case when jour is null then 0 else jour end consomme from v_cumul_conge vc join employe e on vc.id_utilisateur = e.id_utilisateur left join conge_consomme cc on cc.id_employe = id_employe;
 
+-- nante
+create view v_demande_conge_categorie as select dc.*, ctg.* from demande_conge dc join employe e on dc.id_employe=e.id join contrat ct on e.id_contrat=ct.id join categorie ctg on ctg.id=ct.id_categorie;
+
+-- categorie employé par service
+create view v_emp_categorie_service as select e.*,  cat.valeur as categorie, j.id_service as service from employe e join contrat c on e.id_contrat = c.id join categorie cat on c.id_categorie = cat.id join job j on c.id_job = j.id;
+
+create view v_max_categorie_service as  select service, max(categorie) as categorie from v_emp_categorie_service group by service;
+create view v_chef_service as select id, matricule, id_utilisateur, cat.categorie, cat.service from v_emp_categorie_service cat join v_max_categorie_service max on cat.service = max.service and cat.categorie = max.categorie;

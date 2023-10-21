@@ -22,10 +22,10 @@ import com.example.restapi.model.job.JobDetail;
 import com.example.restapi.model.job.JobDiplome;
 import com.example.restapi.model.qcm.Questionnaire;
 import com.example.restapi.repositories.job.JobDetailRepository;
-import com.example.restapi.repositories.job.JobRepository;
 import com.example.restapi.repositories.qcm.QuestionnaireRepository;
 import com.example.restapi.services.UtilisateurService;
 import com.example.restapi.services.authentication.JWTManager;
+import com.example.restapi.services.conge.CongeService;
 import com.example.restapi.services.job.JobService;
 
 import jakarta.persistence.EntityManager;
@@ -47,6 +47,8 @@ public class TestController {
     private EntityManager entityManager;
     @Autowired
     QuestionnaireRepository qRepository;
+    @Autowired
+    private CongeService congeService;
 
     @Autowired
     private JWTManager jwt;
@@ -95,6 +97,15 @@ public class TestController {
             });
         });
         return this.qRepository.save(q);
+    }
+
+    @GetMapping("/emp")
+    public ResponseEntity<?> authEmp() {
+        try {
+            return ResponseEntity.ok().body(this.congeService.findAllDemandeUnderAuthUser());
+        } catch (Exception e) {
+            return ResponseEntity.status(403).body(null);
+        }
     }
 
 }

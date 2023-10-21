@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.restapi.exceptions.CongeException;
+import com.example.restapi.model.Utilisateur;
 import com.example.restapi.model.employe.Employe;
 import com.example.restapi.repositories.EmployeRepository;
 
@@ -15,6 +15,8 @@ public class EmployeService {
 
     @Autowired
     EmployeRepository empRepository;
+    @Autowired
+    private UtilisateurService utilisateurService;
 
     public List<Employe> findByMission(String mission) {
         return this.empRepository.findByContrat_JobMissionContainingIgnoreCase(mission);
@@ -36,5 +38,14 @@ public class EmployeService {
 
     public Optional<Employe> findById(int id) {
         return this.empRepository.findById(id);
+    }
+
+    public Employe getAuthenticatedEmploye() throws Exception {
+        Utilisateur u = this.utilisateurService.getAuthenticatedUser()
+                .orElseThrow(() -> new Exception("Not Connected"));
+        Employe e = this.empRepository.findByUtilisateur(u);
+        int idChef = this.empRepository.getIdChef(e.getService().getId());
+        e.setChef(e.getId() == idChef);
+        return e;
     }
 }

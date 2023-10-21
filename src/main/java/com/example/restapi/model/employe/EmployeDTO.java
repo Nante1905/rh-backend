@@ -22,6 +22,7 @@ public class EmployeDTO {
     String anciennete;
     LocalDate debutContrat;
     String categorie;
+    String service;
 
     public EmployeDTO(Employe source) {
         setId(source.getId());
@@ -35,6 +36,7 @@ public class EmployeDTO {
         setCategorie(source.getContrat().getCategorie().getNom());
         Period period = source.getContrat().getAnciennete();
         setAnciennete(String.format("%dj %dm %da", period.getDays(), period.getMonths(), period.getYears()));
+        setService(source.getService().getNom_service());
         setDebutContrat(source.getContrat().getDebut());
     }
 }

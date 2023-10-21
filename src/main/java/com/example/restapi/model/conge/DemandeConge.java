@@ -3,7 +3,6 @@ package com.example.restapi.model.conge;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-import com.example.restapi.model.contrat.TypeContrat;
 import com.example.restapi.model.employe.Employe;
 
 import jakarta.persistence.Entity;

@@ -1,13 +1,7 @@
 package com.example.restapi.model.qcm;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import com.example.restapi.services.qcm.QuestionnaireService;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -17,7 +11,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OrderBy;
-import jakarta.persistence.Transient;
 
 @Entity
 public class Questionnaire {

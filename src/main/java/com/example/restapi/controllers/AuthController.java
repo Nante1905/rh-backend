@@ -34,6 +34,7 @@ public class AuthController {
         } catch (Exception e) {
             res.put("OK", false);
             res.put("err", e.getMessage());
+            e.printStackTrace();
             return new ResponseEntity<>(res, HttpStatus.BAD_REQUEST);
         }
     }

@@ -12,6 +12,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -96,6 +97,24 @@ public class TestController {
     public ResponseEntity<?> authEmp() {
         try {
             return ResponseEntity.ok().body(this.congeService.findAllDemandeUnderAuthUser());
+        } catch (Exception e) {
+            return ResponseEntity.status(403).body(null);
+        }
+    }
+
+    @GetMapping("/user/{id}")
+    public ResponseEntity<?> user(@PathVariable("id") int id) {
+        try {
+            return ResponseEntity.ok().body(this.utilisateurService.findById(id));
+        } catch (Exception e) {
+            return ResponseEntity.status(403).body(null);
+        }
+    }
+
+    @GetMapping("/user/auth")
+    public ResponseEntity<?> userAuth() {
+        try {
+            return ResponseEntity.ok().body(this.utilisateurService.getAuthenticatedUser().get().generateStringRoles());
         } catch (Exception e) {
             return ResponseEntity.status(403).body(null);
         }

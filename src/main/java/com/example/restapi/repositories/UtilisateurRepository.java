@@ -16,6 +16,8 @@ public interface UtilisateurRepository extends JpaRepository<Utilisateur, Intege
     public Optional<Utilisateur> findUtilisateurByUsernameAndPassword(String username, String password);
 
     @Modifying
-    @Query(value = "update utilisateur_role set id_role=?2 where id_utilisateur=?1", nativeQuery = true)
+    // @Query(value = "update utilisateur_role set id_role=?2 where
+    // id_utilisateur=?1", nativeQuery = true)
+    @Query(value = "insert into utilisateur_role (id_utilisateur, id_role) values (?1, ?2)", nativeQuery = true)
     public void updateRole(int id, int role);
 }

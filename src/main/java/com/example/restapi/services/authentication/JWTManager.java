@@ -10,6 +10,7 @@ import org.springframework.security.authentication.AuthenticationCredentialsNotF
 import org.springframework.stereotype.Component;
 
 import com.example.restapi.model.Utilisateur;
+import com.example.restapi.model.employe.Employe;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -21,14 +22,21 @@ public class JWTManager {
     private static final Key key = new SecretKeySpec(Base64.getDecoder().decode(secret),
             SignatureAlgorithm.HS256.getJcaName());
 
-    public String generateToken(Utilisateur utilisateur) {
+    public String generateToken(Utilisateur utilisateur, Employe employe) {
         Date currentDate = new Date();
+        String position = utilisateur.generateStringRoles();
+
+        if (employe != null) {
+            position = employe.getContrat().getJob().getTitle();
+        }
 
         String token = Jwts.builder()
                 .setSubject(utilisateur.getUsername())
                 .setIssuedAt(currentDate)
                 .setExpiration(new Date(currentDate.getTime() + dayToMs(1)))
+                .claim("nom", utilisateur.getNom() + " " + utilisateur.getPrenom())
                 .claim("roles", utilisateur.generateStringRoles())
+                .claim("position", position)
                 .signWith(key)
                 .compact();
         return token;

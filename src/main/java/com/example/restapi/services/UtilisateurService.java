@@ -8,6 +8,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.example.restapi.model.Utilisateur;
+import com.example.restapi.model.employe.Employe;
+import com.example.restapi.repositories.EmployeRepository;
 import com.example.restapi.repositories.UtilisateurRepository;
 import com.example.restapi.services.authentication.JWTManager;
 import com.example.restapi.types.AuthClass;
@@ -19,6 +21,9 @@ public class UtilisateurService {
 
     @Autowired
     private JWTManager jwt;
+
+    @Autowired
+    private EmployeRepository empRepository;
 
     public void updateToEmploye(int id) {
         this.uRepository.updateRole(id, 3);
@@ -32,6 +37,10 @@ public class UtilisateurService {
         return this.uRepository.findAll();
     }
 
+    public Utilisateur findById(int id) {
+        return this.uRepository.findById(id).get();
+    }
+
     public Optional<Utilisateur> findUtilisateurByUsername(String username) {
         return this.uRepository.findUtilisateurByUsername(username);
     }
@@ -40,11 +49,17 @@ public class UtilisateurService {
         return this.uRepository.findUtilisateurByUsernameAndPassword(username, password);
     }
 
+    public Employe findEmployeByUser(Utilisateur utilisateur) {
+        return this.empRepository.findByUtilisateur(utilisateur);
+    }
+
     public String login(AuthClass user) throws Exception {
         // verify user in db
         Utilisateur utilisateur = findUtilisateurByUsernameAndPassword(user.getUsername(), user.getPassword())
                 .orElseThrow(() -> new Exception("Identifiants invalides"));
-        return jwt.generateToken(utilisateur);
+
+        Employe employe = this.findEmployeByUser(utilisateur);
+        return jwt.generateToken(utilisateur, employe);
     }
 
     public Optional<Utilisateur> getAuthenticatedUser() {

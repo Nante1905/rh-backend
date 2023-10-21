@@ -193,7 +193,7 @@ public class Utilisateur {
     }
 
     public int getAge() {
-        return LocalDate.now().getYear() - this.getNaissance().getYear() ;
+        return LocalDate.now().getYear() - this.getNaissance().getYear();
     }
 
     public void setAge(int age) {

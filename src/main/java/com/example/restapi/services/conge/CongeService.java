@@ -120,6 +120,11 @@ public class CongeService {
         TypeConge typeConge = this.findTypeCongeById(demandeConge.getType().getId())
                 .orElseThrow(() -> new Exception("Type conge invalide"));
         // if(DemandeConge.TypeConge.deductible == false) => return true else
+        if (!typeConge.getGenre().equals("*")
+                && !typeConge.getGenre().equals(String.valueOf(emp.getUtilisateur().getGenre().getId()))) {
+            throw new CongeException("Ce congé n'est pas pour les " + emp.getUtilisateur().getGenre().getNom());
+        }
+
         if (typeConge.isDeductible() == false) {
             return true;
         }

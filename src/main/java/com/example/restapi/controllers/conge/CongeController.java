@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -91,6 +93,23 @@ public class CongeController {
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(403).body(null);
+        }
+
+    }
+
+    @PostMapping("/demandes")
+    public ResponseEntity<?> saveDemande(@RequestBody DemandeCongeDAO demandeCongeDAO) {
+        HashMap<String, Object> res = new HashMap<String, Object>();
+        try {
+            this.congeService.saveDemande(demandeCongeDAO);
+            res.put("OK", true);
+            res.put("msg", "Inseré avec succes");
+            return ResponseEntity.ok().body(res);
+        } catch (Exception e) {
+            res.put("OK", false);
+            res.put("msg", e.getMessage());
+            e.printStackTrace();
+            return ResponseEntity.status(200).body(res);
         }
 
     }

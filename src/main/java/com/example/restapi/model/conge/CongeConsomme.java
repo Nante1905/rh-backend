@@ -25,4 +25,8 @@ public class CongeConsomme {
         setIdEmploye(idEmploye);
         setJour(jour);
     }
+
+    public CongeConsomme(int idEmploye) {
+        setIdEmploye(idEmploye);
+    }
 }

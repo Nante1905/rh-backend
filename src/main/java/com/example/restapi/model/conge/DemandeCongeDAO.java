@@ -19,9 +19,9 @@ public class DemandeCongeDAO {
     int codeStatus;
     String status;
     LocalDate debut;
-    // boolean debutDemiJournee;
+    boolean debutDemiJournee;
     LocalDate fin;
-    // boolean finDemiJournee;
+    boolean finDemiJournee;
 
     public DemandeCongeDAO(DemandeConge source) {
         setId(source.getId());

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.restapi.model.conge.DemandeConge;
 import com.example.restapi.model.conge.DemandeCongeDAO;
+import com.example.restapi.model.conge.TypeConge;
 import com.example.restapi.services.EmployeService;
 import com.example.restapi.services.conge.CongeService;
 
@@ -27,6 +28,11 @@ public class CongeController {
     @GetMapping
     public ResponseEntity<List<DemandeConge>> findAll() {
         return ResponseEntity.ok().body(congeService.findAll());
+    }
+
+    @GetMapping("/types")
+    public ResponseEntity<List<TypeConge>> findAllTypes() {
+        return ResponseEntity.ok().body(congeService.findTypeConges());
     }
 
     // Tokony admin ihany no mahita

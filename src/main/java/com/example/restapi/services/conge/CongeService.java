@@ -13,11 +13,13 @@ import com.example.restapi.model.conge.CongeConsomme;
 import com.example.restapi.model.conge.DemandeConge;
 import com.example.restapi.model.conge.DemandeCongeDAO;
 import com.example.restapi.model.conge.EtatConge;
+import com.example.restapi.model.conge.TypeConge;
 import com.example.restapi.model.employe.Employe;
 import com.example.restapi.repositories.EmployeRepository;
 import com.example.restapi.repositories.conge.CongeConsommeRepository;
 import com.example.restapi.repositories.conge.CongeRepository;
 import com.example.restapi.repositories.conge.EtatCongeRepository;
+import com.example.restapi.repositories.conge.TypeCongeRepository;
 import com.example.restapi.services.EmployeService;
 
 import jakarta.transaction.Transactional;
@@ -34,6 +36,8 @@ public class CongeService {
     private EmployeService employeService;
     @Autowired
     EtatCongeRepository etatCongeRepo;
+    @Autowired
+    TypeCongeRepository typeCongeRepo;
 
     public List<DemandeConge> findAll() {
         return this.congeRepo.findAll();
@@ -46,6 +50,10 @@ public class CongeService {
             demandes.add(new DemandeCongeDAO(d));
         });
         return demandes;
+    }
+
+    public List<TypeConge> findTypeConges() {
+        return this.typeCongeRepo.findAll();
     }
 
     public HashMap<String, Object> findConge() throws Exception {
@@ -97,11 +105,15 @@ public class CongeService {
     }
 
     public boolean checkDemandeConge(int id) throws Exception {
+        // 🤣 Jereo koa l'ty hoe datefin after datedebut ah
         // Alaina aloha ilay DemandeConge
         // Alaina ny emp an'ilay DemandeConge, ovaina getter an'i Employe zany ito
         // if(DemandeConge.TypeConge.deductible == false) => return true else
         Employe emp = new Employe(1);
         // Demandeconge.fin-DemandeConge.debut
+        // d eto koa hoe ahoana raha 1 jour lay izy? genre 2023-10-22 jusqu'à 2023-10-22
+        // ? raha atao ftsn manko différence en jour d lasa 0 io zany hoe lay
+        // Demandeconge.fin-DemandeConge.debut zany mila atao +1,je pense 😶‍🌫️
         int nbr = 2;
         int rest = this.getResteConge(emp.getId());
         // si demandeconget.type.genre ne contains pas demandeConge.emp.genre.id =>

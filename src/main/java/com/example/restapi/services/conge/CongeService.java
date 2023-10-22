@@ -116,7 +116,7 @@ public class CongeService {
         // Demandeconge.fin-DemandeConge.debut zany mila atao +1,je pense 😶‍🌫️
         int nbr = 2;
         int rest = this.getResteConge(emp.getId());
-        // si demandeconget.type.genre ne contains pas demandeConge.emp.genre.id =>
+        // si demandeconget.type.genre != '*' et != demandeConge.emp.genre.id =>
         // throw Exception
         if (rest < nbr) {
             throw new CongeException("Nombre de congé restant insuffisant");
